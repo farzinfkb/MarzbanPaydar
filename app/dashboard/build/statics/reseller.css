@@ -1,0 +1,10 @@
+/* Hide Periodic Usage Reset field group for non-sudo admins.
+   Walk up from the select to its Chakra form-control wrapper. */
+body[data-role="reseller"] .chakra-form-control:has(select[name="data_limit_reset_strategy"]) {
+    display: none !important;
+}
+
+/* Class applied by reseller.js to Reset Usage / Delete buttons */
+body[data-role="reseller"] .reseller-hidden {
+    display: none !important;
+}

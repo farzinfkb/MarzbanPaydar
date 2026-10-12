@@ -58,6 +58,19 @@
 - [ ] زیرمجموعه‌گیری ریسلرها: ساختار درختی، تخصیص اعتبار از والد به فرزند، دیدن زیرمجموعه‌ها
 - [ ] ربات آماده برای هر ریسلر: ریسلر توکن BotFather و شماره کارت را در پنل وارد می‌کند، یک کدبیس چندمستاجره دارد، و فروش از اعتبار خود ریسلر کم می‌شود
 
+### فاز ۳.۵ — Outboundهای چندنوعی و Gateway Group
+- [ ] هر outbound روی سرور به شکل یک اینترفیس کرنلی درمی‌آید:
+  - WireGuard: اینترفیس `wg` (همین الان موجود است)
+  - OpenVPN: کلاینت `openvpn` روی `tun`
+  - IKEv2: strongSwan روی XFRM interface
+  - V2Ray (لینک vless/vmess/trojan/ss): کلاینت sing-box در حالت TUN
+  - SSH: `ssh -w` (tun) یا `-D` به‌علاوه‌ی tun2socks
+- [ ] Gateway Group: یک جدول routing برای هر گروه، که Xray (با `sockopt.mark`) و کاربرهای WireGuard، OpenVPN و L2TP (با `ip rule`) هر دو از آن استفاده می‌کنند
+- [ ] Health checker: تست دوره‌ای از هر عضو، آستانه‌ی خطا و hysteresis، failover و failback بر اساس اولویت، و هشدار به ربات مانیتورینگ
+- [ ] NAT/MASQUERADE روی هر عضو، MSS clamping برای MTUهای متفاوت، و جلوگیری از نشت DNS
+- [ ] صفحه‌ی Outbounds و Gateway Groups در پنل، با import لینک یا فایل `.ovpn` یا `.conf`
+- [ ] مهاجرت `outa` تا `outx` فعلی به گروه‌ها (در ساعت خلوت)
+
 ### فاز ۴ — کلاینت‌ها و برند
 - [ ] اکستنشن مرورگر و gateway پروکسی HTTPS
 - [ ] اپ Flutter با sing-box: اندروید و Android TV، بعد ویندوز، بعد لینوکس و مک. آپدیت خودکار داخل اپ دارد و APK همیشه با یک کلید ثابت امضا می‌شود

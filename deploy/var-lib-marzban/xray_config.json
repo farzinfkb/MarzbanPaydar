@@ -1,0 +1,1161 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "dns": {
+        "servers": [
+            "1.1.1.1"
+        ]
+    },
+    "routing": {
+        "rules": [
+            {
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "BLOCK",
+                "type": "field"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsA"
+                ],
+                "outboundTag": "outa"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsB"
+                ],
+                "outboundTag": "outb"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsC"
+                ],
+                "outboundTag": "outc"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsD"
+                ],
+                "outboundTag": "outd"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsE"
+                ],
+                "outboundTag": "oute"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsF"
+                ],
+                "outboundTag": "outf"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsG"
+                ],
+                "outboundTag": "outg"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsH"
+                ],
+                "outboundTag": "outh"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsI"
+                ],
+                "outboundTag": "outi"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsJ"
+                ],
+                "outboundTag": "outj"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsK"
+                ],
+                "outboundTag": "outk"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsL"
+                ],
+                "outboundTag": "outl"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsM"
+                ],
+                "outboundTag": "outm"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsN"
+                ],
+                "outboundTag": "outn"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsO"
+                ],
+                "outboundTag": "outo"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsP"
+                ],
+                "outboundTag": "outp"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsQ"
+                ],
+                "outboundTag": "outq"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsR"
+                ],
+                "outboundTag": "outr"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsS"
+                ],
+                "outboundTag": "outs"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsT"
+                ],
+                "outboundTag": "outt"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsU"
+                ],
+                "outboundTag": "outu"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsV"
+                ],
+                "outboundTag": "outv"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsW"
+                ],
+                "outboundTag": "outw"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "VlessWsX"
+                ],
+                "outboundTag": "outx"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "tag": "Information",
+            "listen": "127.0.0.1",
+            "port": 1,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            }
+        },
+        {
+            "tag": "VlessWsA",
+            "listen": "0.0.0.0",
+            "port": 3098,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsB",
+            "listen": "0.0.0.0",
+            "port": 3099,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsC",
+            "listen": "0.0.0.0",
+            "port": 2097,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsD",
+            "listen": "0.0.0.0",
+            "port": 2096,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsE",
+            "listen": "0.0.0.0",
+            "port": 2095,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsF",
+            "listen": "0.0.0.0",
+            "port": 2094,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsG",
+            "listen": "0.0.0.0",
+            "port": 4712,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsH",
+            "listen": "0.0.0.0",
+            "port": 5836,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsI",
+            "listen": "0.0.0.0",
+            "port": 6291,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsJ",
+            "listen": "0.0.0.0",
+            "port": 3457,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsK",
+            "listen": "0.0.0.0",
+            "port": 7124,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsL",
+            "listen": "0.0.0.0",
+            "port": 8563,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsM",
+            "listen": "0.0.0.0",
+            "port": 4938,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsN",
+            "listen": "0.0.0.0",
+            "port": 5217,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsO",
+            "listen": "0.0.0.0",
+            "port": 6704,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "updates",
+                    "multiMode": true
+                },
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.3",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsP",
+            "listen": "0.0.0.0",
+            "port": 3821,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsQ",
+            "listen": "0.0.0.0",
+            "port": 7459,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsR",
+            "listen": "0.0.0.0",
+            "port": 8106,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsS",
+            "listen": "0.0.0.0",
+            "port": 4275,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsT",
+            "listen": "0.0.0.0",
+            "port": 5690,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsU",
+            "listen": "0.0.0.0",
+            "port": 6382,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsV",
+            "listen": "0.0.0.0",
+            "port": 9143,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsW",
+            "listen": "0.0.0.0",
+            "port": 4506,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessWsX",
+            "listen": "0.0.0.0",
+            "port": 7938,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "none",
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "DIRECT"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "BLOCK"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outa",
+            "sendThrough": "10.98.15.2",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outa"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outb",
+            "sendThrough": "10.98.15.3",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outb"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outc",
+            "sendThrough": "10.98.15.4",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outc"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outd",
+            "sendThrough": "10.98.15.5",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outd"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "oute",
+            "sendThrough": "10.98.15.6",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "oute"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outf",
+            "sendThrough": "10.98.15.7",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outf"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outg",
+            "sendThrough": "10.98.15.9",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outg"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outh",
+            "sendThrough": "10.98.15.10",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outh"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outi",
+            "sendThrough": "10.98.15.11",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outi"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outj",
+            "sendThrough": "10.98.15.12",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outj"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outk",
+            "sendThrough": "10.98.15.13",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outk"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outl",
+            "sendThrough": "10.98.15.14",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outl"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outm",
+            "sendThrough": "10.98.15.15",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outm"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outn",
+            "sendThrough": "10.98.15.16",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outn"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outo",
+            "sendThrough": "10.98.15.17",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outo"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outp",
+            "sendThrough": "10.98.15.18",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outp"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outq",
+            "sendThrough": "10.98.15.21",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outq"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outr",
+            "sendThrough": "10.98.15.22",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outr"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outs",
+            "sendThrough": "10.98.15.23",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outs"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outt",
+            "sendThrough": "10.98.15.24",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outt"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outu",
+            "sendThrough": "10.98.15.25",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outu"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outv",
+            "sendThrough": "10.98.15.26",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outv"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outw",
+            "sendThrough": "10.98.15.27",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outw"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outx",
+            "sendThrough": "10.98.15.28",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outx"
+                }
+            }
+        },
+        {
+            "protocol": "freedom",
+            "tag": "outy",
+            "sendThrough": "10.30.163.6",
+            "settings": {},
+            "streamSettings": {
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "interface": "outy"
+                }
+            }
+        }
+    ]
+}

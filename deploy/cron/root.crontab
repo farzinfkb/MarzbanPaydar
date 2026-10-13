@@ -1,0 +1,1 @@
+0 3 1 * * certbot renew --quiet && cp /etc/letsencrypt/live/mbn.myp2p.uk/fullchain.pem /var/lib/marzban/certs/mbn.myp2p.uk.crt && cp /etc/letsencrypt/live/mbn.myp2p.uk/privkey.pem /var/lib/marzban/certs/mbn.myp2p.uk.key && cd /opt/marzban && docker compose restart

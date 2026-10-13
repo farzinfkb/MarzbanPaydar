@@ -28,6 +28,15 @@
             }
         });
 
+        // Memory Usage statistics card: match by its title text
+        var MEMORY_TITLES = ['memory usage', 'مصرف حافظه', 'Память', '内存状态'];
+        document.querySelectorAll('.chakra-card p').forEach(function(el) {
+            if (MEMORY_TITLES.indexOf((el.textContent || '').trim()) !== -1) {
+                var card = el.closest('.chakra-card');
+                if (card) card.classList.add('reseller-hidden');
+            }
+        });
+
         // Delete: match by the trash SVG path inside the button
         document.querySelectorAll('button svg path').forEach(function(p) {
             var d = p.getAttribute('d') || '';

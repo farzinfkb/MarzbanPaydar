@@ -40,8 +40,31 @@ def get_system_stats(
     users_limited = crud.get_users_count(
         db, status=UserStatus.limited, admin=dbadmin if not admin.is_sudo else None
     )
-    online_users = crud.count_online_users(db, 24)
+    online_users = crud.count_online_users(
+        db, 24, admin=dbadmin if not admin.is_sudo else None
+    )
     realtime_bandwidth_stats = realtime_bandwidth()
+
+    if not admin.is_sudo:
+        # Resellers see only their own users' traffic, no server resources.
+        return SystemStats(
+            version=__version__,
+            mem_total=0,
+            mem_used=0,
+            cpu_cores=0,
+            cpu_usage=0,
+            total_user=total_user,
+            online_users=online_users,
+            users_active=users_active,
+            users_disabled=users_disabled,
+            users_expired=users_expired,
+            users_limited=users_limited,
+            users_on_hold=users_on_hold,
+            incoming_bandwidth=dbadmin.users_usage or 0,
+            outgoing_bandwidth=0,
+            incoming_bandwidth_speed=0,
+            outgoing_bandwidth_speed=0,
+        )
 
     return SystemStats(
         version=__version__,

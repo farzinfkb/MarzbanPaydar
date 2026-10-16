@@ -19,5 +19,8 @@
 - دیتابیس `/var/lib/marzban/db.sqlite3`
 - سرتیفیکیت‌ها و کلیدها: `/var/lib/marzban/certs`، `/etc/letsencrypt`، `/etc/ssl/private`
 - توکن‌های API ریسلرها
+- کانفیگ Xray مستقل (`/usr/local/etc/xray/config.json`، سرویس `xray.service` روی پورت 2448)، چون کلید Reality و UUID کلاینت دارد. فقط فایل سرویس systemd آن در `systemd/xray.service` است
 
 این موارد فقط از طریق بکاپ رمزنگاری‌شده منتقل می‌شوند.
+
+توضیح کامل معماری و روش اعمال تغییرات: `docs/ARCHITECTURE.md` و `docs/OPERATIONS.md`.

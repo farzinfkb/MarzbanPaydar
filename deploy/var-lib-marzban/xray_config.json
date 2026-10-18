@@ -19,98 +19,112 @@
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsA"
+                    "VlessWsA",
+                    "VlessTlsA"
                 ],
                 "outboundTag": "outa"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsB"
+                    "VlessWsB",
+                    "VlessTlsB"
                 ],
                 "outboundTag": "outb"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsC"
+                    "VlessWsC",
+                    "VlessTlsC"
                 ],
                 "outboundTag": "outc"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsD"
+                    "VlessWsD",
+                    "VlessTlsD"
                 ],
                 "outboundTag": "outd"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsE"
+                    "VlessWsE",
+                    "VlessTlsE"
                 ],
                 "outboundTag": "oute"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsF"
+                    "VlessWsF",
+                    "VlessTlsF"
                 ],
                 "outboundTag": "outf"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsG"
+                    "VlessWsG",
+                    "VlessTlsG"
                 ],
                 "outboundTag": "outg"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsH"
+                    "VlessWsH",
+                    "VlessTlsH"
                 ],
                 "outboundTag": "outh"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsI"
+                    "VlessWsI",
+                    "VlessTlsI"
                 ],
                 "outboundTag": "outi"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsJ"
+                    "VlessWsJ",
+                    "VlessTlsJ"
                 ],
                 "outboundTag": "outj"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsK"
+                    "VlessWsK",
+                    "VlessTlsK"
                 ],
                 "outboundTag": "outk"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsL"
+                    "VlessWsL",
+                    "VlessTlsL"
                 ],
                 "outboundTag": "outl"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsM"
+                    "VlessWsM",
+                    "VlessTlsM"
                 ],
                 "outboundTag": "outm"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsN"
+                    "VlessWsN",
+                    "VlessTlsN"
                 ],
                 "outboundTag": "outn"
             },
@@ -124,63 +138,72 @@
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsP"
+                    "VlessWsP",
+                    "VlessTlsP"
                 ],
                 "outboundTag": "outp"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsQ"
+                    "VlessWsQ",
+                    "VlessTlsQ"
                 ],
                 "outboundTag": "outq"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsR"
+                    "VlessWsR",
+                    "VlessTlsR"
                 ],
                 "outboundTag": "outr"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsS"
+                    "VlessWsS",
+                    "VlessTlsS"
                 ],
                 "outboundTag": "outs"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsT"
+                    "VlessWsT",
+                    "VlessTlsT"
                 ],
                 "outboundTag": "outt"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsU"
+                    "VlessWsU",
+                    "VlessTlsU"
                 ],
                 "outboundTag": "outu"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsV"
+                    "VlessWsV",
+                    "VlessTlsV"
                 ],
                 "outboundTag": "outv"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsW"
+                    "VlessWsW",
+                    "VlessTlsW"
                 ],
                 "outboundTag": "outw"
             },
             {
                 "type": "field",
                 "inboundTag": [
-                    "VlessWsX"
+                    "VlessWsX",
+                    "VlessTlsX"
                 ],
                 "outboundTag": "outx"
             }
@@ -200,6 +223,934 @@
                 "network": "tcp",
                 "tcpSettings": {},
                 "security": "none"
+            }
+        },
+        {
+            "tag": "VlessTlsA",
+            "listen": "0.0.0.0",
+            "port": 13098,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsB",
+            "listen": "0.0.0.0",
+            "port": 13099,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {}
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsC",
+            "listen": "0.0.0.0",
+            "port": 12097,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {}
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsD",
+            "listen": "0.0.0.0",
+            "port": 12096,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {}
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsE",
+            "listen": "0.0.0.0",
+            "port": 12095,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {}
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsF",
+            "listen": "0.0.0.0",
+            "port": 12094,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {}
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsG",
+            "listen": "0.0.0.0",
+            "port": 14712,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsH",
+            "listen": "0.0.0.0",
+            "port": 15836,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsI",
+            "listen": "0.0.0.0",
+            "port": 16291,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsJ",
+            "listen": "0.0.0.0",
+            "port": 13457,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsK",
+            "listen": "0.0.0.0",
+            "port": 17124,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsL",
+            "listen": "0.0.0.0",
+            "port": 18563,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsM",
+            "listen": "0.0.0.0",
+            "port": 14938,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsN",
+            "listen": "0.0.0.0",
+            "port": 15217,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsP",
+            "listen": "0.0.0.0",
+            "port": 13821,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsQ",
+            "listen": "0.0.0.0",
+            "port": 17459,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsR",
+            "listen": "0.0.0.0",
+            "port": 18106,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsS",
+            "listen": "0.0.0.0",
+            "port": 14275,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsT",
+            "listen": "0.0.0.0",
+            "port": 15690,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsU",
+            "listen": "0.0.0.0",
+            "port": 16382,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsV",
+            "listen": "0.0.0.0",
+            "port": 19143,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsW",
+            "listen": "0.0.0.0",
+            "port": 14506,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
+            }
+        },
+        {
+            "tag": "VlessTlsX",
+            "listen": "0.0.0.0",
+            "port": 17938,
+            "protocol": "vless",
+            "settings": {
+                "clients": [],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {},
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "mbn.myp2p.uk",
+                    "minVersion": "1.2",
+                    "fingerprint": "chrome",
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+                        }
+                    ]
+                },
+                "sockopt": {
+                    "tcpFastOpen": true,
+                    "tcpNoDelay": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "fakedns"
+                ]
             }
         },
         {

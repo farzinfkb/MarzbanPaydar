@@ -39,11 +39,21 @@ This document has three parts: (1) the production deployment as it exists today,
 
 ### Inbound → outbound → country
 
+**TLS migration (2026-10-18).**
+- **Why:** newer Xray clients (v26.10.x+) refuse plain VLESS with *"vless without TLS or other encryption is prohibited unless the server address is a private IP or domain"*. This is a client-side check, so updating the server core does not help.
+- **What changed:** every location got a parallel **TCP+TLS** inbound `VlessTls<L>`, on port = old port + 10000, with the same `mbn.myp2p.uk` cert and the same outbound. Hosts have `⚡TLS` in the remark and `sni=mbn.myp2p.uk`.
+- **Order:** TLS inbounds come first in `xray_config.json`, so they appear first in subscriptions.
+- **Transition:** the plain `VlessWs<L>` inbounds remain during a 2–4 week transition, then get removed.
+- **Singapore:** `VlessWsO` was already TLS. It only got `⚡TLS` in its remark.
+- **Exclusions:** users who had `VlessWs<L>` excluded also got `VlessTls<L>` excluded.
+- **Reseller bots:** a bot that creates users with an explicit `inbounds` list must add the `VlessTls*` tags. A user created via the API *without* `inbounds` gets **no** inbounds at all (Marzban 0.8.4 quirk: the pydantic default isn't validated).
+
+
 Every user-facing inbound is VLESS. All of them listen on `0.0.0.0`; their ports are in `xray_config.json`. Every one is plain TCP with no security, except `VlessWsO`, which is gRPC + TLS.
 
 > The `Ws` in the tag names is historical; none of them is WebSocket.
 
-Routing is 1:1: rule `inboundTag VlessWsX → outboundTag outx`, plus `geoip:private → BLOCK`. Each `outX` outbound is Xray `freedom` with `sockopt.interface = "outX"`, which binds the socket to the WireGuard interface of the same name.
+Routing: rule `inboundTag [VlessWsX, VlessTlsX] → outboundTag outx`, plus `geoip:private → BLOCK`. Each `outX` outbound is Xray `freedom` with `sockopt.interface = "outX"`, which binds the socket to the WireGuard interface of the same name.
 
 | Inbound | Outbound / WG iface | Host remark (country) |
 |---|---|---|

@@ -12,6 +12,7 @@
 | `wireguard/out*.conf` | `/etc/wireguard/out*.conf` |
 | `cron/root.crontab` | `crontab -l` (root) |
 | `systemd/xray.service` | `/etc/systemd/system/xray.service` |
+| `certs/paydar-cert-*.sh` | `/usr/local/sbin/` (و لینک `paydar-cert-install.sh` در `/etc/letsencrypt/renewal-hooks/deploy/`) |
 
 ## چیزهایی که عمداً در ریپو نیستند
 - `PrivateKey` و `PresharedKey` وایرگارد (به جایشان `<REDACTED>` گذاشته شده)

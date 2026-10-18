@@ -79,16 +79,30 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 1. Add `/etc/wireguard/outZ.conf` with `Table = off`, then `systemctl enable --now wg-quick@outZ`. Check the handshake with `wg show outZ`.
 2. In `xray_config.json`:
    - add an outbound `{"tag":"outZ","protocol":"freedom","streamSettings":{"sockopt":{"interface":"outZ","tcpFastOpen":true}}}`
-   - add an inbound `VlessWsZ` on a free port
-   - add a routing rule `inboundTag VlessWsZ → outZ`
-3. Restart Xray (connections drop, so this needs the go-ahead).
-4. In the dashboard: add a **host** for `VlessWsZ` (address `mbn.myp2p.uk`, remark with flag and country), and add the inbound to the users and templates that should get it.
+   - add a **TLS** inbound `VlessTlsZ`, copying an existing `VlessTls*` inbound. Plain VLESS is rejected by new clients
+   - add a routing rule `inboundTag VlessTlsZ → outZ`
+3. Apply it with `PUT /api/core/config` (sudo). This restarts only Xray, drops connections for about 1 s, and needs the go-ahead.
+4. In the dashboard: add a **host** for `VlessTlsZ` (address `mbn.myp2p.uk`, sni `mbn.myp2p.uk`, remark `<flag> | <Country> ⚡TLS | <flag>`).
+   - Existing users get new inbounds automatically, because Marzban stores exclusions rather than inclusions.
+   - Reseller bots that pass explicit `inbounds` must add the new tag themselves.
 5. Commit the redacted configs to `deploy/`.
 
 ## Certificates
-- certbot manages `mbn.myp2p.uk`.
-- The monthly cron (`deploy/cron/root.crontab`) renews it, copies it to `/var/lib/marzban/certs/`, and runs `docker compose restart`, which drops connections on the 1st of each month at 03:00.
-- Check expiry with `openssl x509 -enddate -noout -in /var/lib/marzban/certs/mbn.myp2p.uk.crt`.
+- certbot (standalone on :80) manages `mbn.myp2p.uk`. `certbot.timer` tries twice a day and renews 30 days before expiry.
+- **Deploy hook** `/etc/letsencrypt/renewal-hooks/deploy/paydar-cert-install.sh` → `/usr/local/sbin/paydar-cert-install.sh` (source in `deploy/certs/`):
+  - validates the new cert: not expiring, and key matches cert
+  - copies it atomically to `/var/lib/marzban/certs/` and keeps the old files as `*.prev`
+  - schedules a one-shot `paydar-cert-restart` timer for the next **01:00 UTC (04:30 Tehran)** quiet hour
+- **Why the restart waits:** Xray and uvicorn read the cert only at start, so a restart is required. The old cert is still valid for ~30 days, so waiting is safe.
+- **`paydar-cert-restart.sh`:** restarts the container, then checks that ports 443 and 6704 serve the installed cert, and logs the result.
+- **Daily check:** cron runs `paydar-cert-check.sh` at 06:30 UTC. It writes `/var/lib/paydar/cert-status` and warns if the served cert has < 14 days left.
+- **Logs:** `journalctl -t paydar-cert`.
+- **Manual:**
+  - `paydar-cert-install.sh --now` installs and restarts immediately
+  - `--no-restart` only installs
+  - `systemctl list-timers paydar-cert-restart*` shows a pending restart
+- **Dependency:** every user-facing TLS inbound (all `VlessTls*` and `VlessWsO`) depends on this cert.
+- **History:** the old monthly cron (`certbot renew && cp && docker compose restart` on the 1st) was removed on 2026-10-18.
 
 ## Secrets: where they are (never commit)
 
@@ -104,7 +118,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 
 ## Known issues / tech debt (as of 2026-10-16)
 
-1. **Most locations fail on newer clients.** Only Singapore (`VlessWsO`, gRPC + TLS) works on them; the others are plain VLESS over TCP with no TLS. The planned fix is moving them to Reality or TLS (ROADMAP phase 1). A client log is needed to confirm the root cause.
+1. **Plain VLESS inbounds `VlessWs*` are being retired.** Newer clients reject them, and the TLS twins `VlessTls*` replaced them on 2026-10-18. Remove the plain inbounds and their hosts after the transition, around mid-November 2026. That removal needs an Xray restart.
 2. **Reseller backend restriction is pending.** See `PAYDAR_CHANGES.md`. Today only the dashboard hides those actions.
 3. **Paydar patches are hot-patched into the container** and lost on recreate. A custom image or bind-mount is pending.
 4. **No automated backups.** There is only the one-off `/root/backups/*-20260808*`. The daily encrypted backup is the top phase-1 item.
@@ -114,6 +128,5 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
    - hosts `VlessWsAA` and `VlessWsDirect` point to tags that don't exist
    - the haproxy backend `config → 127.0.0.1:12000` points at nothing
    - `XRAY_FALLBACKS_INBOUND_TAG` points to a nonexistent inbound
-7. **Cert renewal restarts Marzban** every month, and it does not reload haproxy. That's fine today, because haproxy is TCP passthrough.
-8. **Standalone `xray.service` on :2448** sits outside Marzban. It is undocumented beyond this note, so ask the owner what it's for before changing it.
-9. **No test suite.** Upstream has none.
+7. **Standalone `xray.service` on :2448** sits outside Marzban. It is undocumented beyond this note, so ask the owner what it's for before changing it.
+8. **No test suite.** Upstream has none.

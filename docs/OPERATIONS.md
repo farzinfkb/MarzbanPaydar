@@ -1,6 +1,6 @@
 # Operations runbook
 
-All commands run as root on the production host. The app container is `marzban-marzban-1`. Read `CLAUDE.md` → "Hard rules" first, and remember: **no restarts without the owner's go-ahead.**
+All commands run as root on the production host, VM `Ubuntu26-VPN` (`79.127.32.253`, SSH port 4915 as `farzin`, then `sudo -i`). The app container is `marzban-marzban-1`. Read `CLAUDE.md` → "Hard rules" first, and remember: **no restarts without the owner's go-ahead.**
 
 ## Disruption levels
 
@@ -13,7 +13,8 @@ All commands run as root on the production host. The app container is `marzban-m
 | `docker restart marzban-marzban-1` | API and Xray down for about 6 s, and **every connection drops** |
 | `systemctl restart wg-quick@outX` | Users on that location drop |
 | `systemctl reload haproxy` | Usually seamless. `restart` drops panel/sub connections |
-| `docker compose up -d` after a change | **Recreates the container, which loses the Paydar patches** (see `PAYDAR_CHANGES.md`) |
+| `docker compose up -d` after a change | Recreates the container from `paydar/marzban:abalon-20261026`. Patches baked into that image survive; files `docker cp`'d in after 2026-10-26 are lost unless you commit a new image (see `PAYDAR_CHANGES.md`) |
+| Reboot of the host | Everything comes back on its own (`wg-quick@outX`, haproxy and docker are enabled, the container has `restart: always`). OpenGate on the same host drops too, so it needs the owner's go-ahead |
 
 ## Inspect state
 
@@ -22,7 +23,8 @@ docker ps --filter name=marzban-marzban-1
 docker logs --since 10m marzban-marzban-1 2>&1 | tail -100
 ss -ltnp
 wg show interfaces; wg show outa latest-handshakes
-systemctl is-active haproxy xray unbound
+systemctl is-active haproxy docker
+ip route show | grep 76.76     # Control D routes via outa must be present
 # DB queries via the app's own models (no sqlite3 binary in the container):
 docker exec marzban-marzban-1 python -c "
 from app.db import GetDB, crud
@@ -65,7 +67,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 7. **Verify behaviour** with a short-lived token, as above.
 8. **Update** the "Live on prod?" column in `PAYDAR_CHANGES.md`.
 
-**Rollback:** copy the pristine file back in from `/root/src/container-code/app/...` (an unpatched copy of the image code), or from `git show <commit>:path`, then restart.
+**Rollback:** copy the previous version back in from `git show <commit>:path` (upstream v0.8.4 is commit `7f396db`), then restart. The old host's unpatched copy `/root/src/container-code` was not migrated.
 
 ## Changing Xray config
 
@@ -97,6 +99,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 - **`paydar-cert-restart.sh`:** restarts the container, then checks that ports 443 and 6704 serve the installed cert, and logs the result.
 - **Daily check:** cron runs `paydar-cert-check.sh` at 06:30 UTC. It writes `/var/lib/paydar/cert-status` and warns if the served cert has < 14 days left.
 - **Logs:** `journalctl -t paydar-cert`.
+- **Firewall:** renewal needs 80/tcp open in ufw (rule `marzban certbot http-01`).
 - **Manual:**
   - `paydar-cert-install.sh --now` installs and restarts immediately
   - `--no-restart` only installs
@@ -111,22 +114,27 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 | WireGuard keys | `/etc/wireguard/out*.conf` |
 | Marzban DB (password hashes, user UUIDs, sub tokens) | `/var/lib/marzban/db.sqlite3` |
 | TLS keys | `/var/lib/marzban/certs/`, `/etc/letsencrypt/`, `/etc/ssl/private/` |
-| Standalone Xray Reality key and client | `/usr/local/etc/xray/config.json` |
+| Migration material (old host backup, DB copies, WG configs) | `/root/migrate/` |
 | Telegram bot token | Commented in `/opt/marzban/.env`. The owner should revoke it |
 | Reseller token | `/root/mahan-api/token.txt` |
 | GitHub deploy key | `/root/.ssh/marzbanpaydar_deploy` |
 
-## Known issues / tech debt (as of 2026-10-16)
+## Known issues / tech debt (updated 2026-10-27)
 
 1. **Plain VLESS inbounds `VlessWs*` are being retired.** Newer clients reject them, and the TLS twins `VlessTls*` replaced them on 2026-10-18. Remove the plain inbounds and their hosts after the transition, around mid-November 2026. That removal needs an Xray restart.
 2. **Reseller backend restriction is pending.** See `PAYDAR_CHANGES.md`. Today only the dashboard hides those actions.
-3. **Paydar patches are hot-patched into the container** and lost on recreate. A custom image or bind-mount is pending.
-4. **No automated backups.** There is only the one-off `/root/backups/*-20260808*`. The daily encrypted backup is the top phase-1 item.
-5. **Firewall is off** (`ufw inactive`). Every port, including 24000 (panel without haproxy), is publicly reachable.
-6. **Orphans and dead config:**
-   - `outy` has no inbound, and its unit is inactive
-   - hosts `VlessWsAA` and `VlessWsDirect` point to tags that don't exist
-   - the haproxy backend `config → 127.0.0.1:12000` points at nothing
+3. **Paydar patches live in a locally committed image** (`paydar/marzban:abalon-20261026`), not in an image built from this repo. A reproducible build is still pending (ROADMAP phase 1).
+4. **No automated backups.** The daily encrypted backup is the top phase-1 item. The 2026-10-26 migration tarball in `/root/migrate/` is the most recent full copy.
+5. **Orphans and dead config:**
+   - the `outy` outbound in `xray_config.json` has no inbound and no interface
    - `XRAY_FALLBACKS_INBOUND_TAG` points to a nonexistent inbound
-7. **Standalone `xray.service` on :2448** sits outside Marzban. It is undocumented beyond this note, so ask the owner what it's for before changing it.
+6. **DNS depends on `outa`.** Control D is routed only through `outa`; if that tunnel is down, panel and Xray DNS fail.
+7. **Shared host with OpenGate.** Its policy routing (`from 79.127.32.253 lookup 201`, fwmark tables) and its own WG interfaces (`wg1`…`wg7`) are not Marzban's. Don't change them.
 8. **No test suite.** Upstream has none.
+
+## Migration history
+
+- **2026-10-27 02:12–02:14 (Tehran):** moved from VPS MarzbanAbalon (`185.129.119.176`) to `Ubuntu26-VPN` on ESX1. User-facing outage was about 1.5 minutes.
+  - **Procedure:** stop Marzban, Xray and the WG outbounds on the old host. Take a consistent `sqlite3 .backup` copy of the DB and re-address the IP-based hosts to `79.127.32.253`. Start WG, Marzban and haproxy on the new host. Flip the `mbn.myp2p.uk` A record in Cloudflare.
+  - **Old host:** it forwards 443 and the VLESS ports to the new host (iptables `PG_BRIDGE`, undo with `iptables -t nat -F PG_BRIDGE; iptables -F PG_BRIDGE_FWD`) until it expires.
+  - **Rollback while the old host lives:** stop Marzban and the WG outbounds here, remove the bridge there, re-enable `marzban-marzban-1` and `wg-quick@outa..x` there, then point DNS back. The old host's DB is stale after the cutover.

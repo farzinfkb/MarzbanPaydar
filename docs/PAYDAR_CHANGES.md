@@ -58,7 +58,7 @@ Non-code additions (no effect on runtime): `CLAUDE.md`, `docs/`, `deploy/`.
 
 ## Re-applying patches to a fresh container
 
-Recreating the container (`docker compose up` with a changed compose/env, `pull`, or a new image) discards the patches. Re-apply them with:
+Since 2026-10-27 production runs `paydar/marzban:abalon-20261026`, which already contains the patches listed above, so a plain recreate from that image keeps them. Re-apply them only when starting from a stock image (or after `pull`). The repo is not cloned on the new host yet; clone it first with `git clone git@github-marzbanpaydar:farzinfkb/MarzbanPaydar.git /root/src/MarzbanPaydar`. Then:
 
 ```bash
 cd /root/src/MarzbanPaydar

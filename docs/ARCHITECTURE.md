@@ -1,37 +1,51 @@
 # Architecture
 
-This document has three parts: (1) the production deployment as it exists today, (2) how Marzban works internally, and (3) the Paydar concepts and target architecture. The facts were snapshotted from the live server on 2026-10-16. Re-verify anything you depend on (see `OPERATIONS.md`).
+This document has three parts: (1) the production deployment as it exists today, (2) how Marzban works internally, and (3) the Paydar concepts and target architecture. The facts were snapshotted from the live server on 2026-10-16, and section 1 was updated after the move to the ESX server on 2026-10-27. Re-verify anything you depend on (see `OPERATIONS.md`).
 
 ---
 
 ## 1. Production deployment (today)
 
 ### Host
-- One VPS in Iran, Ubuntu 24.04, kernel 6.8.
-- Resources: 3.8 GB RAM, 19 GB disk.
-- Public IP `185.129.119.176`, hostname `ubuntu-sajjad`.
-- There is no firewall (`ufw` is inactive) and no Marzban nodes. Everything runs on this one host.
+- **Since 2026-10-27:** VM `Ubuntu26-VPN` on the owner's ESXi host ESX1 (Iran). Ubuntu 26.04, kernel 7.0, 8 vCPU (E5-2620 v3), 5 GB RAM, 77 GB disk.
+- **Interfaces:**
+  - `ens192` `79.127.32.253/29`: public. Clients connect here; `mbn.myp2p.uk` points here (Cloudflare, DNS only).
+  - `ens256` `192.168.200.33/24`: internal LAN of the pfSense "lite" VMs. The WireGuard outbounds use it.
+  - `ens224` `192.168.100.43`: fiber LAN, management only.
+- SSH: port 4915, user `farzin` with sudo. Root login is not used.
+- **Shared host:** the OpenGate VPN gateway also runs here, in docker (`opengate`, `opengate-postgres-1`). It owns policy routing: `from 79.127.32.253 lookup 201` and fwmark tables. Don't touch its rules; Marzban does not need them.
+- Firewall: `ufw` is active. Only 443/tcp, 80/tcp (certbot) and the VLESS ports (rules commented `marzban vless`) are open for Marzban. Port 24000 is **not** reachable from outside.
+- **Previous host (until 2026-10-27):** VPS `ubuntu-sajjad`, `185.129.119.176` (MarzbanAbalon). It is now only a DNAT bridge to the new host (iptables chain `PG_BRIDGE`) until its lease expires (~2026-10-29). Don't run Marzban, Xray or the WG outbounds there again unless you are rolling back.
 
 ### Process / port map
 
 | Listener | Process | Purpose |
 |---|---|---|
-| `0.0.0.0:443` | haproxy (systemd) | TCP/SNI router. `mbn.myp2p.uk` and `paydpan.eladmin.uk` go to panel `127.0.0.1:24000`. `shekarchi.easyinbox.info` goes to `127.0.0.1:12000`, which is **dead** because nothing listens there. The default is the panel |
-| `0.0.0.0:24000` | Marzban (uvicorn, inside docker, host network) | API, dashboard, subscription. TLS is terminated here with the `/var/lib/marzban/certs/mbn.myp2p.uk.*` certs |
-| 24 VLESS ports (see below) | Xray, child process of Marzban | User traffic |
+| `0.0.0.0:443` | haproxy 3.2 (systemd) | TCP/SNI router. Everything goes to the panel `127.0.0.1:24000` |
+| `0.0.0.0:24000` | Marzban (uvicorn, inside docker, host network) | API, dashboard, subscription. TLS is terminated here with the `/var/lib/marzban/certs/mbn.myp2p.uk.*` certs. Blocked by ufw from outside |
+| 47 VLESS ports (see below) | Xray, child process of Marzban | User traffic |
 | `127.0.0.1:1` | Xray | `Information` inbound. It is a fake inbound used only to show "data left / days left" as a config entry in subscriptions |
-| `0.0.0.0:2448` | **standalone** Xray (systemd `xray.service`, `/usr/local/etc/xray/config.json`) | One VLESS Reality inbound with 1 client and a direct outbound. It is **not managed by Marzban** and was not copied to the repo because it holds keys |
-| `127.0.0.1:53` | unbound | Local DNS resolver |
-| `:22` | sshd | |
+| `:80` | certbot (only during renewal) | HTTP-01 challenge |
+
+Not migrated from the old host, on purpose: the standalone Xray on `:2448` (unused), unbound, and the haproxy backends for `paydpan.eladmin.uk` and `shekarchi.easyinbox.info` (retired domains).
+
+### DNS
+- Marzban and Xray resolve through **Control D (unfiltered)**, `76.76.2.0` and `76.76.10.0`.
+  - The container gets them via a bind-mounted `/opt/marzban/resolv.conf`.
+  - Xray gets them from the `dns.servers` block in `xray_config.json`.
+- Both resolvers are routed **only through `outa`**: `PostUp` in `/etc/wireguard/outa.conf` adds `/32` routes to them. Iranian resolvers return filtered answers (e.g. `10.10.34.35`), so DNS must leave the country.
+- The host's own resolver is not changed, so OpenGate and the OS are unaffected.
+- If `outa` is down, Marzban's DNS fails too. Check `outa` first when users report "connected, no internet".
 
 ### Marzban container
-- **Container:** `/opt/marzban/docker-compose.yml` defines service `marzban`, so the container name is `marzban-marzban-1`. It uses image `gozargah/marzban:latest`, `network_mode: host`, and mounts `/var/lib/marzban` only.
+- **Container:** `/opt/marzban/docker-compose.yml` defines service `marzban`, so the container name is `marzban-marzban-1`. It uses `network_mode: host`, `restart: always`, and mounts `/var/lib/marzban` plus `/opt/marzban/resolv.conf`.
+- **Image:** `paydar/marzban:abalon-20261026`, a local image committed from the running production container on 2026-10-26 (base `gozargah/marzban:latest` v0.8.4). It already contains the Paydar hot patches, so recreating the container keeps them. It exists only on this host; never `docker compose pull`.
 - **Env:** `/opt/marzban/.env`; a redacted copy is at `deploy/opt-marzban/env`. Key values:
   - `DASHBOARD_PATH=/paydardashadmin/`, so the dashboard is at `https://mbn.myp2p.uk/paydardashadmin/`.
   - `XRAY_SUBSCRIPTION_PATH=pysub`, so subscriptions are at `https://mbn.myp2p.uk/pysub/<token>`.
   - `XRAY_SUBSCRIPTION_URL_PREFIX=https://mbn.myp2p.uk`.
   - `XRAY_EXECUTABLE_PATH=/var/lib/marzban/xray-core/xray` (Xray 26.1.23, newer than the image's bundled one).
-  - `SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzban/db.sqlite3` (about 13 MB).
+  - `SQLALCHEMY_DATABASE_URL=sqlite:////var/lib/marzban/db.sqlite3` (about 18 MB).
   - `CUSTOM_TEMPLATES_DIRECTORY=/var/lib/marzban/templates/`, which holds the custom subscription page.
   - `XRAY_FALLBACKS_INBOUND_TAG=TROJAN_FALLBACK_INBOUND`, which is stale because no such inbound exists.
   - The Telegram bot is disabled and `DOCS` is off, so there is no `/docs`.
@@ -49,7 +63,7 @@ This document has three parts: (1) the production deployment as it exists today,
 - **Reseller bots:** a bot that creates users with an explicit `inbounds` list must add the `VlessTls*` tags. A user created via the API *without* `inbounds` gets **no** inbounds at all (Marzban 0.8.4 quirk: the pydantic default isn't validated).
 
 
-Every user-facing inbound is VLESS. All of them listen on `0.0.0.0`; their ports are in `xray_config.json`. Every one is plain TCP with no security, except `VlessWsO`, which is gRPC + TLS.
+Every user-facing inbound is VLESS. All of them listen on `0.0.0.0`; their ports are in `xray_config.json` (`VlessTls*` on 12094–19143, plain `VlessWs*` on 2094–9143, `VlessWsO` on 6704). Every one is plain TCP with no security, except `VlessWsO`, which is gRPC + TLS.
 
 > The `Ws` in the tag names is historical; none of them is WebSocket.
 
@@ -57,7 +71,7 @@ Routing: rule `inboundTag [VlessWsX, VlessTlsX] → outboundTag outx`, plus `geo
 
 | Inbound | Outbound / WG iface | Host remark (country) |
 |---|---|---|
-| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2") |
+| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2", now `79.127.32.253`) |
 | VlessWsB | outb | Switzerland |
 | VlessWsC | outc | Italy |
 | VlessWsD | outd | Nigeria (+ IP host) |
@@ -81,33 +95,36 @@ Routing: rule `inboundTag [VlessWsX, VlessTlsX] → outboundTag outx`, plus `geo
 | VlessWsV | outv | India |
 | VlessWsW | outw | Japan |
 | VlessWsX | outx | Bulgaria |
-| — | outy | Interface and Xray outbound exist, but **no inbound or rule uses it** (orphan) |
+| — | outy | Xray outbound still exists in `xray_config.json`, but no inbound or rule uses it and there is no `outy` interface on the new host (orphan) |
 
-Orphan hosts in the DB, whose inbound tags don't exist in `xray_config.json`:
-- `VlessWsAA`
-- `VlessWsDirect`, which points at the dead `shekarchi.easyinbox.info` haproxy backend
+The orphan hosts `VlessWsAA` and `VlessWsDirect` were deleted from the DB during the move.
 
 ### WireGuard outbounds
-- The configs are `/etc/wireguard/outa.conf` … `outy.conf`. Redacted copies are in `deploy/wireguard/`.
-- All 25 interfaces are up. `outa`…`outx` run under enabled `wg-quick@outX` systemd units. `outy`'s unit is enabled but inactive, and its interface was brought up by hand.
-- Each one is a client to a commercial VPN provider endpoint.
-- Every config has `Table = off`, so no routes are installed. Traffic enters a tunnel only because Xray binds sockets to the interface (`sockopt.interface`).
-- **Consequence for redundancy:** a standby server must not bring these up with the same keys. The provider endpoint would flap between the two servers' IPs.
+- The configs are `/etc/wireguard/outa.conf` … `outx.conf`. Redacted copies are in `deploy/wireguard/`. They run under enabled `wg-quick@outX` units, so they come back after a reboot.
+- Each one is a client of a pfSense "lite" VM on the same ESX LAN, which then exits through a commercial VPN. Since 2026-10-27 the endpoints are the lites' **private** IPs over `ens256`:
+
+| Tunnels | Endpoint | pfSense |
+|---|---|---|
+| `outa`–`outh` | `192.168.200.24:17450` | lite2 |
+| `outi`–`outp` | `192.168.200.23:17455` | lite1 |
+| `outq`–`outx` | `192.168.200.22:17460` | lite3 |
+
+  The old public endpoints (`79.127.32.254:<port>`, DNAT on Mikrotik3) still work as a fallback. Backups of the public-endpoint configs are in `/root/migrate/wg-public-endpoint/` on the host.
+- Every config has `Table = off`, so no default routes are installed. Traffic enters a tunnel only because Xray binds sockets to the interface (`sockopt.interface`). The one exception is the two Control D `/32` routes in `outa.conf` (see DNS above).
+- **Consequence for redundancy:** a standby server must not bring these up with the same keys. The pfSense peer endpoint would flap between the two servers' IPs.
 
 ### TLS certificates
-- Let's Encrypt (certbot) for `mbn.myp2p.uk`.
-- Monthly root cron (`deploy/cron/root.crontab`): `certbot renew`, copy to `/var/lib/marzban/certs/`, then `docker compose restart`. It restarts **Marzban, not haproxy**, and runs on the 1st of the month at 03:00 server time.
+- Let's Encrypt (certbot, standalone HTTP-01 on :80) for `mbn.myp2p.uk`. `certbot.timer` renews; a deploy hook installs the cert and schedules a quiet-hour restart. See `OPERATIONS.md` → Certificates.
 
 ### Tenants
 - **Admins:** one sudo admin (`paydar`) and 9 non-sudo resellers (`geo`, `blade`, `mamareza`, `alireza.premium`, `mahan`, `anypremium`, `digitalro`, `mehdi`, `mojtabamojed`).
 - **Users:** about 870 in total. The largest reseller has about 450.
 
 ### Other things on the host (not part of the app)
-- `/root/backups/`: a **one-off manual** backup from 2026-08-08 (marzban tar, wireguard tar, crontab, package list). There are no automated backups yet (ROADMAP phase 1).
+- `/root/migrate/`: material from the 2026-10-27 move (the old host's full backup tarball, `cutover.sh` and its log, the dry-run DB, and the public-endpoint WG configs). Contains secrets.
 - `/root/mahan-api/`: API guide and **token** for reseller `mahan`. Treat it as a secret.
-- `/root/configtest`, `/root/configtester`: ad-hoc scripts and a small Flask app for testing config links.
-- `/root/src/container-code/`: a copy of `/code` from the production container, taken *before* Paydar patches. It shows the pristine image code.
-- `/root/Marzban`, `/root/Marzban.zip`, `/root/db.sqlite3`, `/root/marzban.sh`: older leftovers. Don't assume they are current.
+- `/root/Marzban`: an old upstream clone copied from the old host. Don't assume it is current; this repo is the source of truth.
+- There are still no automated DB backups (ROADMAP phase 1).
 
 ---
 

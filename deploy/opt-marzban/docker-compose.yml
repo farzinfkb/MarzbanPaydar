@@ -1,8 +1,11 @@
 services:
   marzban:
-    image: gozargah/marzban:latest
+    # committed from the live Abalon container on 2026-10-26 (keeps the Paydar hot patches)
+    image: paydar/marzban:abalon-20261026
     restart: always
     env_file: .env
     network_mode: host
     volumes:
       - /var/lib/marzban:/var/lib/marzban
+      # Control D, routed into outa only (see /etc/wireguard/outa.conf)
+      - /opt/marzban/resolv.conf:/etc/resolv.conf:ro

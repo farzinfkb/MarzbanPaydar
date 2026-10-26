@@ -2,16 +2,18 @@
 
 نسخه‌ای از کانفیگ‌های سرور production، برای بازسازی سرور یا ساخت سرور standby.
 
+سرور production از ۲۰۲۶-۱۰-۲۷ ماشین `Ubuntu26-VPN` روی ESX1 است (`79.127.32.253`). endpoint تونل‌های وایرگارد، آی‌پی خصوصی pfSenseهای lite است و DNS مرزبان (Control D) فقط از `outa` رد می‌شود. جزئیات در `docs/ARCHITECTURE.md`.
+
 | مسیر در ریپو | مسیر روی سرور |
 |---|---|
 | `opt-marzban/docker-compose.yml` | `/opt/marzban/docker-compose.yml` |
 | `opt-marzban/env` | `/opt/marzban/.env` |
+| `opt-marzban/resolv.conf` | `/opt/marzban/resolv.conf` (داخل کانتینر روی `/etc/resolv.conf` مونت می‌شود) |
 | `var-lib-marzban/xray_config.json` | `/var/lib/marzban/xray_config.json` |
 | `var-lib-marzban/templates/subscription/index.html` | `/var/lib/marzban/templates/subscription/index.html` |
 | `haproxy/haproxy.cfg` | `/etc/haproxy/haproxy.cfg` |
 | `wireguard/out*.conf` | `/etc/wireguard/out*.conf` |
 | `cron/root.crontab` | `crontab -l` (root) |
-| `systemd/xray.service` | `/etc/systemd/system/xray.service` |
 | `certs/paydar-cert-*.sh` | `/usr/local/sbin/` (و لینک `paydar-cert-install.sh` در `/etc/letsencrypt/renewal-hooks/deploy/`) |
 
 ## چیزهایی که عمداً در ریپو نیستند
@@ -20,7 +22,7 @@
 - دیتابیس `/var/lib/marzban/db.sqlite3`
 - سرتیفیکیت‌ها و کلیدها: `/var/lib/marzban/certs`، `/etc/letsencrypt`، `/etc/ssl/private`
 - توکن‌های API ریسلرها
-- کانفیگ Xray مستقل (`/usr/local/etc/xray/config.json`، سرویس `xray.service` روی پورت 2448)، چون کلید Reality و UUID کلاینت دارد. فقط فایل سرویس systemd آن در `systemd/xray.service` است
+- ایمیج `paydar/marzban:abalon-20261026` که پچ‌های Paydar داخلش است و فقط روی خود سرور وجود دارد
 
 این موارد فقط از طریق بکاپ رمزنگاری‌شده منتقل می‌شوند.
 

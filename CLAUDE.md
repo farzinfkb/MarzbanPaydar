@@ -59,7 +59,7 @@ docs/                Paydar docs (Paydar-only)
    - **WireGuard interfaces and haproxy** fall under the same rule.
    - Read-only inspection is always fine.
 3. **Ask before implementing features.** For any non-trivial feature the owner expects difficulty, challenges and options first, and implementation only after they say go.
-4. **Commit and push after every change** to `origin` (`git@github-marzbanpaydar:farzinfkb/MarzbanPaydar.git`, branch `master`, SSH deploy key `/root/.ssh/marzbanpaydar_deploy` via the `github-marzbanpaydar` host alias).
+4. **Commit and push after every change** to `origin` (`git@github-marzbanpaydar:farzinfkb/MarzbanPaydar.git`, branch `master`, SSH deploy key `/root/.ssh/marzbanpaydar_deploy` via the `github-marzbanpaydar` host alias, present on the production host `Ubuntu26-VPN`).
    - Author: `farzinfkb <paydarclfkb1@outlook.com>`.
    - End messages with a `Co-Authored-By:` trailer naming the agent.
    - GitHub DNS sometimes fails transiently, so retry the push.
@@ -71,13 +71,14 @@ docs/                Paydar docs (Paydar-only)
 
 ## How code reaches production (important)
 
-Production runs the **stock image `gozargah/marzban:latest`** (built 2025-01-09, v0.8.4), *not* an image built from this repo.
+Production (since 2026-10-27 on `Ubuntu26-VPN`, see `docs/ARCHITECTURE.md`) runs the **local image `paydar/marzban:abalon-20261026`**, *not* an image built from this repo. It was made with `docker commit` from the old production container, which ran stock `gozargah/marzban:latest` (v0.8.4) plus the Paydar hot patches.
 
 - **How Paydar changes go live today:** the changed files are copied into the running container (`docker cp`), followed by `docker restart` when they are Python files.
 - **They survive** `docker restart`.
-- **They are lost** if the container is recreated (`docker compose up` after a compose/env change, `docker compose pull`, or image update).
-- **Before recreating the container**, re-apply every file in the list in `docs/PAYDAR_CHANGES.md`.
-- **Planned fix:** a custom image or bind-mounts (ROADMAP phase 1).
+- **Patches made before 2026-10-26 are baked into the image** and survive a recreate.
+- **Patches `docker cp`'d in later are lost** on a recreate (`docker compose up` after a compose/env change) unless you `docker commit` a new image and point the compose file at it.
+- **Never `docker compose pull`:** the image is local only, and the pull would replace it with stock Marzban.
+- **Planned fix:** a custom image built from this repo, or bind-mounts (ROADMAP phase 1).
 
 See `docs/OPERATIONS.md` → "Deploying a code change" for the exact procedure, including the pre-copy diff check.
 

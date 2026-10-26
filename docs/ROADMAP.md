@@ -48,7 +48,7 @@
 - [ ] محدودیت بک‌اند ریسلرها: delete، reset، active-next، data_limit_reset_strategy، next_plan
 - [ ] ساخت ایمیج اختصاصی از فورک
 - [ ] ربات مانیتورینگ: سرور، Xray، handshakeهای WireGuard، سرتیفیکیت‌ها، تست هر لوکیشن، probe داخل ایران
-- [ ] پاک‌سازی: firewall، سرتیفیکیت‌های منقضی، `outy` و hostهای یتیم
+- [ ] پاک‌سازی: سرتیفیکیت‌های منقضی و outbound `outy` در `xray_config.json` (firewall، hostهای یتیم و اینترفیس `outy` با انتقال به سرور ESX در ۲۰۲۶-۱۰-۲۷ حل شدند)
 - [ ] بکاپ روزانه (الان بکاپ خودکاری وجود ندارد؛ فقط یک بکاپ دستی از ۲۰۲۶-۰۸-۰۸ در `/root/backups`):
   - snapshot سازگار از SQLite با `sqlite3 .backup`، نه کپی مستقیم فایل
   - به‌همراه `xray_config.json`، templateها، سرتیفیکیت‌ها، کانفیگ‌های WireGuard، haproxy و `.env`

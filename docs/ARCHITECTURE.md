@@ -71,7 +71,7 @@ Routing: rule `inboundTag [VlessWsX, VlessTlsX] → outboundTag outx`, plus `geo
 
 | Inbound | Outbound / WG iface | Host remark (country) |
 |---|---|---|
-| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2", `79.127.32.253` — must move to `.251`) |
+| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2", now `79.127.32.251`) |
 | VlessWsB | outb | Switzerland |
 | VlessWsC | outc | Italy |
 | VlessWsD | outd | Nigeria (+ IP host) |

@@ -1,6 +1,6 @@
 # Operations runbook
 
-All commands run as root on the production host, VM `Ubuntu26-VPN` (`79.127.32.253`, SSH port 4915 as `farzin`, then `sudo -i`). The app container is `marzban-marzban-1`. Read `CLAUDE.md` → "Hard rules" first, and remember: **no restarts without the owner's go-ahead.**
+All commands run as root on the production host, VM `Ubuntu26-VPN` (`79.127.32.253`, clients use `79.127.32.251`; SSH port 4915 as `farzin`, then `sudo -i`). The app container is `marzban-marzban-1`. Read `CLAUDE.md` → "Hard rules" first, and remember: **no restarts without the owner's go-ahead.**
 
 ## Disruption levels
 
@@ -129,8 +129,9 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
    - the `outy` outbound in `xray_config.json` has no inbound and no interface
    - `XRAY_FALLBACKS_INBOUND_TAG` points to a nonexistent inbound
 6. **DNS depends on `outa`.** Control D is routed only through `outa`; if that tunnel is down, panel and Xray DNS fail.
-7. **Shared host with OpenGate.** Its policy routing (`from 79.127.32.253 lookup 201`, fwmark tables) and its own WG interfaces (`wg1`…`wg7`) are not Marzban's. Don't change them.
-8. **No test suite.** Upstream has none.
+7. **Mobile operators can't reach `79.127.32.253` (found 2026-10-27).** MCI and Irancell don't route to `.253` at all (no ping, no TCP), while fixed-line ISPs do. Fix: `79.127.32.251` was added as a second address on `ens192`, and `mbn.myp2p.uk` was pointed at it. Xray and haproxy listen on all addresses, so nothing needed a restart. Any host entry with a raw IP must use `.251`. Check new IPs from mobile data before using them.
+8. **Shared host with OpenGate.** Its policy routing (`from 79.127.32.253 lookup 201`, fwmark tables) and its own WG interfaces (`wg1`…`wg7`) are not Marzban's. Don't change them.
+9. **No test suite.** Upstream has none.
 
 ## Migration history
 

@@ -9,7 +9,7 @@ This document has three parts: (1) the production deployment as it exists today,
 ### Host
 - **Since 2026-10-27:** VM `Ubuntu26-VPN` on the owner's ESXi host ESX1 (Iran). Ubuntu 26.04, kernel 7.0, 8 vCPU (E5-2620 v3), 5 GB RAM, 77 GB disk.
 - **Interfaces:**
-  - `ens192` `79.127.32.253/29`: public. Clients connect here; `mbn.myp2p.uk` points here (Cloudflare, DNS only).
+  - `ens192` `79.127.32.253/29` + secondary `79.127.32.251/29` (added 2026-10-27, persisted in `/etc/netplan/00-installer-config.yaml`). Clients connect to `.251`: `mbn.myp2p.uk` points there (Cloudflare, DNS only). `.253` is not reachable from the mobile operators (MCI, Irancell), so it stays only as the primary/source address for outbound traffic and for OpenGate.
   - `ens256` `192.168.200.33/24`: internal LAN of the pfSense "lite" VMs. The WireGuard outbounds use it.
   - `ens224` `192.168.100.43`: fiber LAN, management only.
 - SSH: port 4915, user `farzin` with sudo. Root login is not used.
@@ -71,7 +71,7 @@ Routing: rule `inboundTag [VlessWsX, VlessTlsX] → outboundTag outx`, plus `geo
 
 | Inbound | Outbound / WG iface | Host remark (country) |
 |---|---|---|
-| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2", now `79.127.32.253`) |
+| VlessWsA | outa | Daily Fast (also an IP-based host "Daily Fast 2", `79.127.32.253` — must move to `.251`) |
 | VlessWsB | outb | Switzerland |
 | VlessWsC | outc | Italy |
 | VlessWsD | outd | Nigeria (+ IP host) |

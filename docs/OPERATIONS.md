@@ -140,3 +140,12 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
   - **Procedure:** stop Marzban, Xray and the WG outbounds on the old host. Take a consistent `sqlite3 .backup` copy of the DB and re-address the IP-based hosts to `79.127.32.253`. Start WG, Marzban and haproxy on the new host. Flip the `mbn.myp2p.uk` A record in Cloudflare.
   - **Old host:** it forwards 443 and the VLESS ports to the new host (iptables `PG_BRIDGE`, undo with `iptables -t nat -F PG_BRIDGE; iptables -F PG_BRIDGE_FWD`) until it expires.
   - **Rollback while the old host lives:** stop Marzban and the WG outbounds here, remove the bridge there, re-enable `marzban-marzban-1` and `wg-quick@outa..x` there, then point DNS back. The old host's DB is stale after the cutover.
+
+## Swapping the relay (Relay1) when its IP is filtered
+
+Scripts live in `deploy/relay/`:
+- `relay-setup.sh`: turns a fresh Ubuntu VPS into a relay (key-only SSH, sysctl/BBR/conntrack, nftables DNAT to `.253`). Idempotent. `CHECK=1` only prints the generated ruleset. **Any new Marzban/OpenGate inbound port must be added here** and re-applied to the live relay.
+- `marzban-switch-relay.sh NEW_IP [OLD_IP]`: run as root on `Ubuntu26-VPN`. It backs up the DB and hosts, then re-points every public raw-IP host via `PUT /api/hosts` (live, no restart). `DRY=1` shows the changes only.
+- `cutover.sh NEW_IP [--relay-only]`: run from the owner's Mac. It runs both scripts and updates the `Relay1` SSH alias.
+
+Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate is **not** touched: its public host stays as is, and the owner edits client endpoints themselves.

@@ -11,7 +11,7 @@ This document has three parts: (1) the production deployment as it exists today,
 - **Interfaces:**
   - `ens192` `79.127.32.253/29` + secondary `79.127.32.251/29` (added 2026-10-27, persisted in `/etc/netplan/00-installer-config.yaml`). `.253` and later `.251` were both filtered on the mobile operators (MCI, Irancell).
   - Since 2026-10-28, clients connect through **Relay1** (`62.60.207.137`, Iranian VPS, Ubuntu 24.04, SSH alias `Relay1`). `mbn.myp2p.uk` and the IP-based hosts point there.
-  - Relay1 is a pure nftables DNAT + masquerade to `79.127.32.253` (`/etc/nftables.conf`). It forwards TCP 443 plus all direct VLESS ports (same list as the old Abalon `PG_BRIDGE`), and OpenGate TCP 21714 + TCP/UDP 62000-64000. Nothing else runs on it; SSH is key-only.
+  - Relay1 is a pure nftables DNAT + masquerade to `79.127.32.253` (`/etc/nftables.conf`). It forwards TCP 443 plus all direct VLESS ports (same list as the old Abalon `PG_BRIDGE`), and OpenGate TCP 21714 + TCP/UDP 62000-64000, plus OpenGate's classic VPNs: UDP 500/4500/1701, TCP 1723 (with the nf_conntrack_pptp helper), and GRE/ESP. Nothing else runs on it; SSH is key-only.
   - Xray therefore sees the relay IP as the client source for relayed traffic. If a relay IP gets filtered, buy/swap the relay IP and re-point the hosts; the backend IPs don't change.
   - `ens256` `192.168.200.33/24`: internal LAN of the pfSense "lite" VMs. The WireGuard outbounds use it.
   - `ens224` `192.168.100.43`: fiber LAN, management only.

@@ -130,7 +130,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
    - `XRAY_FALLBACKS_INBOUND_TAG` points to a nonexistent inbound
 6. **DNS depends on `outa`.** Control D is routed only through `outa`; if that tunnel is down, panel and Xray DNS fail.
 7. **Mobile operators can't reach `79.127.32.253` (found 2026-10-27).** MCI and Irancell don't route to `.253` at all (no ping, no TCP), while fixed-line ISPs do. Fix: `79.127.32.251` was added as a second address on `ens192`, and `mbn.myp2p.uk` was pointed at it. Xray and haproxy listen on all addresses, so nothing needed a restart. Any host entry with a raw IP must use the current client-facing IP. Check new IPs from mobile data before using them.
-   - Update 2026-10-28: `.251` was filtered too, so clients now go through Relay1 (`185.36.145.222`, nftables DNAT to `.253`, see `docs/ARCHITECTURE.md`). The 4 IP-based hosts were moved with `PUT /api/hosts` (backup `/root/migrate/hosts-prerelay.json`, DB `/root/migrate/db-prerelay-*.sqlite3`). Adding a new Marzban inbound port means also adding it to `MARZBAN_TCP` in Relay1's `/etc/nftables.conf` and running `nft -f /etc/nftables.conf`.
+   - Update 2026-10-28: `.251` was filtered too, so clients now go through Relay1 (`185.36.145.222`, nftables DNAT to `.253`, see `docs/ARCHITECTURE.md`). The 4 IP-based hosts were moved with `PUT /api/hosts` (backup `/root/migrate/hosts-prerelay.json`, DB `/root/migrate/db-prerelay-*.sqlite3`). Since 2026-11-03 the relay forwards TCP 443 only (all configs use 443, haproxy routes by SNI), so a new inbound needs an SNI entry in haproxy, not a relay change.
 8. **Shared host with OpenGate.** Its policy routing (`from 79.127.32.253 lookup 201`, fwmark tables) and its own WG interfaces (`wg1`…`wg7`) are not Marzban's. Don't change them.
 9. **No test suite.** Upstream has none.
 
@@ -144,8 +144,8 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 ## Swapping the relay (Relay1) when its IP is filtered
 
 Scripts live in `deploy/relay/`:
-- `relay-setup.sh`: turns a fresh Ubuntu VPS into a relay (key-only SSH, sysctl/BBR/conntrack, nftables DNAT to `.253`). Idempotent. `CHECK=1` only prints the generated ruleset. **Any new Marzban/OpenGate inbound port must be added here** and re-applied to the live relay.
+- `relay-setup.sh`: turns a fresh Ubuntu VPS into a relay (key-only SSH, sysctl/BBR/conntrack, nftables DNAT of TCP 443 to `.253`, nothing else). Idempotent; re-running it on a live relay also removes any old extra forwards. `CHECK=1` only prints the generated ruleset.
 - `marzban-switch-relay.sh NEW_IP [OLD_IP]`: run as root on `Ubuntu26-VPN`. It backs up the DB and hosts, then re-points every public raw-IP host via `PUT /api/hosts` (live, no restart). `DRY=1` shows the changes only.
 - `cutover.sh NEW_IP [--relay-only]`: run from the owner's Mac. It runs both scripts and updates the `Relay1` SSH alias.
 
-Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate is **not** touched: its public host stays as is, and the owner edits client endpoints themselves.
+Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate does not use the relay.

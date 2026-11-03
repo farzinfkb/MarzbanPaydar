@@ -18,7 +18,8 @@ TS=$(date +%Y%m%d-%H%M%S)
 is_ip() { [[ "$1" =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]]; }
 
 [ "$(id -u)" = 0 ] || { echo "run as root (sudo)" >&2; exit 1; }
-is_ip "$NEW" || { echo "NEW_IP '$NEW' is not an IPv4 address" >&2; exit 1; }
+# NEW may also be a hostname (e.g. mbn.myp2p.uk) to move raw-IP hosts onto the domain for good.
+is_ip "$NEW" || [[ "$NEW" =~ ^[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?$ ]] || { echo "NEW '$NEW' is not an IPv4 address or hostname" >&2; exit 1; }
 [ -z "$OLD" ] || is_ip "$OLD" || { echo "OLD_IP '$OLD' is not an IPv4 address" >&2; exit 1; }
 install -d -m 700 "$DIR"
 

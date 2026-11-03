@@ -145,7 +145,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 
 Scripts live in `deploy/relay/`:
 - `relay-setup.sh`: turns a fresh Ubuntu VPS into a relay (key-only SSH, sysctl/BBR/conntrack, nftables DNAT of TCP 443 to `.253`, nothing else). Idempotent; re-running it on a live relay also removes any old extra forwards. `CHECK=1` only prints the generated ruleset.
-- `marzban-switch-relay.sh NEW_IP [OLD_IP]`: run as root on `Ubuntu26-VPN`. It backs up the DB and hosts, then re-points every public raw-IP host via `PUT /api/hosts` (live, no restart). `DRY=1` shows the changes only.
-- `cutover.sh NEW_IP [--relay-only]`: run from the owner's Mac. It runs both scripts and updates the `Relay1` SSH alias.
+- `cutover.sh NEW_IP`: run from the owner's Mac. It runs `relay-setup.sh` on the new server and updates the `Relay1` SSH alias. Marzban is not touched: since 2026-11-03 every host uses `mbn.myp2p.uk` (the last 4 raw-IP hosts, "Daily Fast 2" and "Nigeria 2", were moved to the domain; backup `/root/migrate/hosts-pre-20261103-202627.json`).
+- `marzban-switch-relay.sh NEW [OLD_IP]`: optional, run as root on `Ubuntu26-VPN`. Re-points every host on a public raw IP to NEW (an IP or a hostname) via `PUT /api/hosts` (live, no restart), after backing up the DB and hosts. `DRY=1` shows the changes only. Not needed while no host uses a raw IP.
 
 Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate does not use the relay.

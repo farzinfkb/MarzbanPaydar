@@ -38,4 +38,4 @@
 bash deploy/relay/cutover.sh NEW_IP
 ```
 
-بعد رکورد `mbn.myp2p.uk` را در `Cloudflare` به آی‌پی جدید تغییر دهید. توضیح کامل در `docs/OPERATIONS.md` است.
+بعد رکوردهای لازم را در `Cloudflare` به آی‌پی جدید تغییر دهید: `mbn.myp2p.uk` برای پنل و ساب، `mbna.myp2p.uk` برای Reality و `mbnb.myp2p.uk` برای TLS. توضیح کامل در `docs/OPERATIONS.md` است.

@@ -10,7 +10,7 @@ This document has three parts: (1) the production deployment as it exists today,
 - **Since 2026-10-27:** VM `Ubuntu26-VPN` on the owner's ESXi host ESX1 (Iran). Ubuntu 26.04, kernel 7.0, 8 vCPU (E5-2620 v3), 5 GB RAM, 77 GB disk.
 - **Interfaces:**
   - `ens192` `79.127.32.253/29` + secondary `79.127.32.251/29` (added 2026-10-27, persisted in `/etc/netplan/00-installer-config.yaml`). `.253` and later `.251` were both filtered on the mobile operators (MCI, Irancell).
-  - Since 2026-10-28, clients connect through **Relay1** (Iranian VPS, Ubuntu 24.04, SSH alias `Relay1`; `185.36.145.235` as of 2026-11-03). `mbn.myp2p.uk` points there, and since 2026-11-03 every Marzban host uses that domain, so a relay swap is just `deploy/relay/cutover.sh` plus the DNS change.
+  - Since 2026-10-28, clients connect through **Relay1** (Iranian VPS, Ubuntu 24.04, SSH alias `Relay1`; `213.176.121.19` as of 2026-11-04). `mbn.myp2p.uk` (panel, subscription), `mbna.myp2p.uk` (Reality hosts) and `mbnb.myp2p.uk` (TLS hosts, since 2026-11-04) point at relays; every Marzban host uses a domain, so a relay swap is just `deploy/relay/cutover.sh` plus the DNS change.
   - Relay1 is a pure nftables DNAT + masquerade to `79.127.32.253` (`/etc/nftables.conf`). Since 2026-11-03 it forwards **TCP 443 only**: every Marzban config uses port 443 and haproxy picks the inbound by SNI, and OpenGate no longer goes through the relay. Fewer open ports lowers the filtering risk. Nothing else runs on it; SSH is key-only.
   - Xray therefore sees the relay IP as the client source for relayed traffic. If a relay IP gets filtered, buy/swap the relay IP and re-point the hosts; the backend IPs don't change.
   - `ens256` `192.168.200.33/24`: internal LAN of the pfSense "lite" VMs. The WireGuard outbounds use it.
@@ -117,7 +117,7 @@ The orphan hosts `VlessWsAA` and `VlessWsDirect` were deleted from the DB during
 - **Consequence for redundancy:** a standby server must not bring these up with the same keys. The pfSense peer endpoint would flap between the two servers' IPs.
 
 ### TLS certificates
-- Let's Encrypt (certbot, standalone HTTP-01 on :80) for `mbn.myp2p.uk`. `certbot.timer` renews; a deploy hook installs the cert and schedules a quiet-hour restart. See `OPERATIONS.md` → Certificates.
+- Let's Encrypt (certbot, DNS-01 via Cloudflare) for `mbn.myp2p.uk` and `*.mbn.myp2p.uk`. `certbot.timer` renews; a deploy hook installs the cert and schedules a quiet-hour restart. See `OPERATIONS.md` → Certificates.
 
 ### Tenants
 - **Admins:** one sudo admin (`paydar`) and 9 non-sudo resellers (`geo`, `blade`, `mamareza`, `alireza.premium`, `mahan`, `anypremium`, `digitalro`, `mehdi`, `mojtabamojed`).

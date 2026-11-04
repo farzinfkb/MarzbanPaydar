@@ -5,8 +5,9 @@
 #
 #   bash deploy/relay/cutover.sh NEW_IP
 #
-# Every Marzban host uses the domain mbn.myp2p.uk (no raw IPs since 2026-11-03), so Marzban needs no change.
-# Afterwards, point mbn.myp2p.uk (Cloudflare, DNS only) at NEW_IP.
+# Marzban hosts use domains only (no raw IPs since 2026-11-03), so Marzban needs no change:
+#   mbn.myp2p.uk = panel + subscription, mbna.myp2p.uk = Reality hosts, mbnb.myp2p.uk = TLS hosts (since 2026-11-04).
+# Afterwards, point whichever of them should use this relay at NEW_IP (Cloudflare, DNS only).
 set -euo pipefail
 
 NEW="${1:?usage: $0 NEW_IP}"
@@ -31,5 +32,5 @@ fi
 ssh -o BatchMode=yes Relay1 true && echo "   key login OK"
 
 echo
-echo "Now set mbn.myp2p.uk -> $NEW in Cloudflare (DNS only), then test from MCI and Irancell data."
+echo "Now point mbn / mbna (Reality) / mbnb (TLS) .myp2p.uk -> $NEW in Cloudflare as needed (DNS only), then test from MCI and Irancell data."
 echo "Keep the old relay${OLD:+ ($OLD)} running until clients have picked up the new DNS."

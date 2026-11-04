@@ -84,13 +84,13 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
    - add a **TLS** inbound `VlessTlsZ`, copying an existing `VlessTls*` inbound. Plain VLESS is rejected by new clients
    - add a routing rule `inboundTag VlessTlsZ → outZ`
 3. Apply it with `PUT /api/core/config` (sudo). This restarts only Xray, drops connections for about 1 s, and needs the go-ahead.
-4. In the dashboard: add a **host** for `VlessTlsZ` (address `mbn.myp2p.uk`, sni `mbn.myp2p.uk`, remark `<flag> | <Country> ⚡TLS | <flag>`).
+4. In the dashboard: add a **host** for `VlessTlsZ` (address `mbnb.myp2p.uk`, sni `<l>.mbn.myp2p.uk`, remark `<flag> | <Country> ⚡TLS | <flag>`).
    - Existing users get new inbounds automatically, because Marzban stores exclusions rather than inclusions.
    - Reseller bots that pass explicit `inbounds` must add the new tag themselves.
 5. Commit the redacted configs to `deploy/`.
 
 ## Certificates
-- certbot (standalone on :80) manages `mbn.myp2p.uk`. `certbot.timer` tries twice a day and renews 30 days before expiry.
+- certbot (DNS-01 via `dns-cloudflare`, cert `mbn.myp2p.uk` + `*.mbn.myp2p.uk`) manages it. `certbot.timer` tries twice a day and renews 30 days before expiry.
 - **Deploy hook** `/etc/letsencrypt/renewal-hooks/deploy/paydar-cert-install.sh` → `/usr/local/sbin/paydar-cert-install.sh` (source in `deploy/certs/`):
   - validates the new cert: not expiring, and key matches cert
   - copies it atomically to `/var/lib/marzban/certs/` and keeps the old files as `*.prev`
@@ -148,7 +148,7 @@ Scripts live in `deploy/relay/`:
 - `cutover.sh NEW_IP`: run from the owner's Mac. It runs `relay-setup.sh` on the new server and updates the `Relay1` SSH alias. Marzban is not touched: since 2026-11-03 every host uses `mbn.myp2p.uk` (the last 4 raw-IP hosts, "Daily Fast 2" and "Nigeria 2", were moved to the domain; backup `/root/migrate/hosts-pre-20261103-202627.json`).
 - `marzban-switch-relay.sh NEW [OLD_IP]`: optional, run as root on `Ubuntu26-VPN`. Re-points every host on a public raw IP to NEW (an IP or a hostname) via `PUT /api/hosts` (live, no restart), after backing up the DB and hosts. `DRY=1` shows the changes only. Not needed while no host uses a raw IP.
 
-Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate does not use the relay.
+Afterwards, point the domains that should use the new relay at its IP in Cloudflare (DNS only). Since 2026-11-04 the client-facing addresses are split: `mbna.myp2p.uk` for every Reality host, `mbnb.myp2p.uk` for every TLS host (VlessTls*, VlessWsO); `mbn.myp2p.uk` stays for the panel and subscription links. SNIs did not change, so each domain can sit behind a different relay. Backup of the switch: `/root/migrate/hosts-pre-split-20261104-215412.json`, `db-pre-split-20261104-215412.sqlite3`. New hosts must follow the same split. OpenGate does not use the relay.
 
 ## Reality SNIs (2026-11-04)
 

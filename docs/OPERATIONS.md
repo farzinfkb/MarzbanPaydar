@@ -22,9 +22,9 @@ All commands run as root on the production host, VM `Ubuntu26-VPN` (`79.127.32.2
 docker ps --filter name=marzban-marzban-1
 docker logs --since 10m marzban-marzban-1 2>&1 | tail -100
 ss -ltnp
-wg show interfaces; wg show outa latest-handshakes
+wg show interfaces
 systemctl is-active haproxy docker
-ip route show | grep 76.76     # Control D routes via outa must be present
+ip rule | grep 76.76           # Control D via uplink tables 101/103 (marzban-dns-route.service) must be present
 # DB queries via the app's own models (no sqlite3 binary in the container):
 docker exec marzban-marzban-1 python -c "
 from app.db import GetDB, crud
@@ -128,7 +128,7 @@ curl -sk -H "Authorization: Bearer $T" https://mbn.myp2p.uk/api/system
 5. **Orphans and dead config:**
    - the `outy` outbound in `xray_config.json` has no inbound and no interface
    - `XRAY_FALLBACKS_INBOUND_TAG` points to a nonexistent inbound
-6. **DNS depends on `outa`.** Control D is routed only through `outa`; if that tunnel is down, panel and Xray DNS fail.
+6. **Xray DNS (Control D) must leave through a foreign uplink.** Queries sent straight out of `ens192` are intercepted by the Iranian network: filtered names return `10.10.34.x` and Control D itself times out, so customers can't open any site. `marzban-dns-route.service` (`deploy/systemd/`) adds `ip rule to 76.76.2.0 lookup 101` and `to 76.76.10.0 lookup 103` (OpenGate uplink tables `up-ss-tr` / `up-ss-tr2`). The old routes lived in `outa`'s `PostUp`; when `outa` was retired they vanished and DNS broke (fixed 2026-11-04). Check: `ip rule | grep 76.76`, then `docker exec marzban-marzban-1 python -c "import socket;print(socket.gethostbyname('example.com'))"`.
 7. **Mobile operators can't reach `79.127.32.253` (found 2026-10-27).** MCI and Irancell don't route to `.253` at all (no ping, no TCP), while fixed-line ISPs do. Fix: `79.127.32.251` was added as a second address on `ens192`, and `mbn.myp2p.uk` was pointed at it. Xray and haproxy listen on all addresses, so nothing needed a restart. Any host entry with a raw IP must use the current client-facing IP. Check new IPs from mobile data before using them.
    - Update 2026-10-28: `.251` was filtered too, so clients now go through Relay1 (`185.36.145.222`, nftables DNAT to `.253`, see `docs/ARCHITECTURE.md`). The 4 IP-based hosts were moved with `PUT /api/hosts` (backup `/root/migrate/hosts-prerelay.json`, DB `/root/migrate/db-prerelay-*.sqlite3`). Since 2026-11-03 the relay forwards TCP 443 only (all configs use 443, haproxy routes by SNI), so a new inbound needs an SNI entry in haproxy, not a relay change.
 8. **Shared host with OpenGate.** Its policy routing (`from 79.127.32.253 lookup 201`, fwmark tables) and its own WG interfaces (`wg1`…`wg7`) are not Marzban's. Don't change them.
@@ -149,3 +149,7 @@ Scripts live in `deploy/relay/`:
 - `marzban-switch-relay.sh NEW [OLD_IP]`: optional, run as root on `Ubuntu26-VPN`. Re-points every host on a public raw IP to NEW (an IP or a hostname) via `PUT /api/hosts` (live, no restart), after backing up the DB and hosts. `DRY=1` shows the changes only. Not needed while no host uses a raw IP.
 
 Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGate does not use the relay.
+
+## Reality SNIs (2026-11-04)
+
+Reality inbounds A-X (no O) use SNIs on `rahbar.ir` (A-J), `hostiran.cloud` (K-M), `padvish.com` (N, P-S) and `amnpardaz.com` (T-X); `dest` is the site's IP because names are resolved poorly from here. The old `*.bale.ai` names stay in `serverNames` and in `/etc/haproxy/marzban-sni.map` until every client has refreshed its subscription; remove them after that. Backups of the switch: `/root/migrate/sni-switch-20261104-135015`. Vision (`flow: xtls-rprx-vision`) is not enabled yet: it rejects clients that haven't refreshed, so plan it with an announcement.

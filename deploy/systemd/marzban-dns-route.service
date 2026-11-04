@@ -1,0 +1,17 @@
+[Unit]
+Description=Route Xray DNS (Control D) through foreign uplinks (tables 101/103), not the filtered ISP path
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=-/usr/sbin/ip rule del to 76.76.2.0/32 lookup 101 priority 1050
+ExecStart=-/usr/sbin/ip rule del to 76.76.10.0/32 lookup 103 priority 1050
+ExecStart=/usr/sbin/ip rule add to 76.76.2.0/32 lookup 101 priority 1050
+ExecStart=/usr/sbin/ip rule add to 76.76.10.0/32 lookup 103 priority 1050
+ExecStop=-/usr/sbin/ip rule del to 76.76.2.0/32 lookup 101 priority 1050
+ExecStop=-/usr/sbin/ip rule del to 76.76.10.0/32 lookup 103 priority 1050
+
+[Install]
+WantedBy=multi-user.target

@@ -12,6 +12,8 @@
 | `var-lib-marzban/xray_config.json` | `/var/lib/marzban/xray_config.json` |
 | `var-lib-marzban/templates/subscription/index.html` | `/var/lib/marzban/templates/subscription/index.html` |
 | `haproxy/haproxy.cfg` | `/etc/haproxy/haproxy.cfg` |
+| `haproxy/marzban-sni.map` | `/etc/haproxy/marzban-sni.map` |
+| `systemd/marzban-dns-route.service` | `/etc/systemd/system/marzban-dns-route.service` |
 | `wireguard/out*.conf` | `/etc/wireguard/out*.conf` |
 | `cron/root.crontab` | `crontab -l` (root) |
 | `certs/paydar-cert-*.sh` | `/usr/local/sbin/` (و لینک `paydar-cert-install.sh` در `/etc/letsencrypt/renewal-hooks/deploy/`) |

@@ -1,2113 +1,2545 @@
 {
-    "log": {
-        "loglevel": "warning"
-    },
-    "dns": {
-        "servers": [
-            "76.76.2.0",
-            "76.76.10.0"
-        ]
-    },
-    "routing": {
-        "rules": [
-            {
-                "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "BLOCK",
-                "type": "field"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsA",
-                    "VlessTlsA"
-                ],
-                "outboundTag": "outa"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsB",
-                    "VlessTlsB"
-                ],
-                "outboundTag": "outb"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsC",
-                    "VlessTlsC"
-                ],
-                "outboundTag": "outc"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsD",
-                    "VlessTlsD"
-                ],
-                "outboundTag": "outd"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsE",
-                    "VlessTlsE"
-                ],
-                "outboundTag": "oute"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsF",
-                    "VlessTlsF"
-                ],
-                "outboundTag": "outf"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsG",
-                    "VlessTlsG"
-                ],
-                "outboundTag": "outg"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsH",
-                    "VlessTlsH"
-                ],
-                "outboundTag": "outh"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsI",
-                    "VlessTlsI"
-                ],
-                "outboundTag": "outi"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsJ",
-                    "VlessTlsJ"
-                ],
-                "outboundTag": "outj"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsK",
-                    "VlessTlsK"
-                ],
-                "outboundTag": "outk"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsL",
-                    "VlessTlsL"
-                ],
-                "outboundTag": "outl"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsM",
-                    "VlessTlsM"
-                ],
-                "outboundTag": "outm"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsN",
-                    "VlessTlsN"
-                ],
-                "outboundTag": "outn"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsO"
-                ],
-                "outboundTag": "outo"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsP",
-                    "VlessTlsP"
-                ],
-                "outboundTag": "outp"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsQ",
-                    "VlessTlsQ"
-                ],
-                "outboundTag": "outq"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsR",
-                    "VlessTlsR"
-                ],
-                "outboundTag": "outr"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsS",
-                    "VlessTlsS"
-                ],
-                "outboundTag": "outs"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsT",
-                    "VlessTlsT"
-                ],
-                "outboundTag": "outt"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsU",
-                    "VlessTlsU"
-                ],
-                "outboundTag": "outu"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsV",
-                    "VlessTlsV"
-                ],
-                "outboundTag": "outv"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsW",
-                    "VlessTlsW"
-                ],
-                "outboundTag": "outw"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "VlessWsX",
-                    "VlessTlsX"
-                ],
-                "outboundTag": "outx"
-            }
-        ]
-    },
-    "inbounds": [
-        {
-            "tag": "Information",
-            "listen": "127.0.0.1",
-            "port": 1,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            }
-        },
-        {
-            "tag": "VlessTlsA",
-            "listen": "0.0.0.0",
-            "port": 13098,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsB",
-            "listen": "0.0.0.0",
-            "port": 13099,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {}
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsC",
-            "listen": "0.0.0.0",
-            "port": 12097,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {}
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsD",
-            "listen": "0.0.0.0",
-            "port": 12096,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {}
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsE",
-            "listen": "0.0.0.0",
-            "port": 12095,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {}
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsF",
-            "listen": "0.0.0.0",
-            "port": 12094,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {}
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsG",
-            "listen": "0.0.0.0",
-            "port": 14712,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsH",
-            "listen": "0.0.0.0",
-            "port": 15836,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsI",
-            "listen": "0.0.0.0",
-            "port": 16291,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsJ",
-            "listen": "0.0.0.0",
-            "port": 13457,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsK",
-            "listen": "0.0.0.0",
-            "port": 17124,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsL",
-            "listen": "0.0.0.0",
-            "port": 18563,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsM",
-            "listen": "0.0.0.0",
-            "port": 14938,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsN",
-            "listen": "0.0.0.0",
-            "port": 15217,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsP",
-            "listen": "0.0.0.0",
-            "port": 13821,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsQ",
-            "listen": "0.0.0.0",
-            "port": 17459,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsR",
-            "listen": "0.0.0.0",
-            "port": 18106,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsS",
-            "listen": "0.0.0.0",
-            "port": 14275,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsT",
-            "listen": "0.0.0.0",
-            "port": 15690,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsU",
-            "listen": "0.0.0.0",
-            "port": 16382,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsV",
-            "listen": "0.0.0.0",
-            "port": 19143,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsW",
-            "listen": "0.0.0.0",
-            "port": 14506,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessTlsX",
-            "listen": "0.0.0.0",
-            "port": 17938,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.2",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsA",
-            "listen": "0.0.0.0",
-            "port": 3098,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsB",
-            "listen": "0.0.0.0",
-            "port": 3099,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsC",
-            "listen": "0.0.0.0",
-            "port": 2097,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsD",
-            "listen": "0.0.0.0",
-            "port": 2096,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsE",
-            "listen": "0.0.0.0",
-            "port": 2095,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsF",
-            "listen": "0.0.0.0",
-            "port": 2094,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none"
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsG",
-            "listen": "0.0.0.0",
-            "port": 4712,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsH",
-            "listen": "0.0.0.0",
-            "port": 5836,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsI",
-            "listen": "0.0.0.0",
-            "port": 6291,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsJ",
-            "listen": "0.0.0.0",
-            "port": 3457,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsK",
-            "listen": "0.0.0.0",
-            "port": 7124,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsL",
-            "listen": "0.0.0.0",
-            "port": 8563,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsM",
-            "listen": "0.0.0.0",
-            "port": 4938,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsN",
-            "listen": "0.0.0.0",
-            "port": 5217,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsO",
-            "listen": "0.0.0.0",
-            "port": 6704,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "grpc",
-                "grpcSettings": {
-                    "serviceName": "updates",
-                    "multiMode": true
-                },
-                "security": "tls",
-                "tlsSettings": {
-                    "serverName": "mbn.myp2p.uk",
-                    "minVersion": "1.3",
-                    "fingerprint": "chrome",
-                    "alpn": [
-                        "h2"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
-                            "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
-                        }
-                    ]
-                },
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsP",
-            "listen": "0.0.0.0",
-            "port": 3821,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsQ",
-            "listen": "0.0.0.0",
-            "port": 7459,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsR",
-            "listen": "0.0.0.0",
-            "port": 8106,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsS",
-            "listen": "0.0.0.0",
-            "port": 4275,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsT",
-            "listen": "0.0.0.0",
-            "port": 5690,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsU",
-            "listen": "0.0.0.0",
-            "port": 6382,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsV",
-            "listen": "0.0.0.0",
-            "port": 9143,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsW",
-            "listen": "0.0.0.0",
-            "port": 4506,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        },
-        {
-            "tag": "VlessWsX",
-            "listen": "0.0.0.0",
-            "port": 7938,
-            "protocol": "vless",
-            "settings": {
-                "clients": [],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "tcpSettings": {},
-                "security": "none",
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "tcpNoDelay": true
-                }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls",
-                    "fakedns"
-                ]
-            }
-        }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "DIRECT"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "BLOCK"
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outa",
-            "sendThrough": "10.98.15.2",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outa"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outb",
-            "sendThrough": "10.98.15.3",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outb"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outc",
-            "sendThrough": "10.98.15.4",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outc"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outd",
-            "sendThrough": "10.98.15.5",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outd"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "oute",
-            "sendThrough": "10.98.15.6",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "oute"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outf",
-            "sendThrough": "10.98.15.7",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outf"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outg",
-            "sendThrough": "10.98.15.9",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outg"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outh",
-            "sendThrough": "10.98.15.10",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outh"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outi",
-            "sendThrough": "10.98.15.11",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outi"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outj",
-            "sendThrough": "10.98.15.12",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outj"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outk",
-            "sendThrough": "10.98.15.13",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outk"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outl",
-            "sendThrough": "10.98.15.14",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outl"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outm",
-            "sendThrough": "10.98.15.15",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outm"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outn",
-            "sendThrough": "10.98.15.16",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outn"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outo",
-            "sendThrough": "10.98.15.17",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outo"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outp",
-            "sendThrough": "10.98.15.18",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outp"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outq",
-            "sendThrough": "10.98.15.21",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outq"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outr",
-            "sendThrough": "10.98.15.22",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outr"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outs",
-            "sendThrough": "10.98.15.23",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outs"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outt",
-            "sendThrough": "10.98.15.24",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outt"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outu",
-            "sendThrough": "10.98.15.25",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outu"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outv",
-            "sendThrough": "10.98.15.26",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outv"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outw",
-            "sendThrough": "10.98.15.27",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outw"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outx",
-            "sendThrough": "10.98.15.28",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outx"
-                }
-            }
-        },
-        {
-            "protocol": "freedom",
-            "tag": "outy",
-            "sendThrough": "10.30.163.6",
-            "settings": {},
-            "streamSettings": {
-                "sockopt": {
-                    "tcpFastOpen": true,
-                    "interface": "outy"
-                }
-            }
-        }
+  "log": {
+    "loglevel": "warning"
+  },
+  "dns": {
+    "servers": [
+      "76.76.2.0",
+      "76.76.10.0"
     ]
+  },
+  "routing": {
+    "rules": [
+      {
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "BLOCK",
+        "type": "field"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsA",
+          "VlessRealityA"
+        ],
+        "outboundTag": "OpenGate-Germany"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsB",
+          "VlessRealityB"
+        ],
+        "outboundTag": "OpenGate-Switzerland"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsC",
+          "VlessRealityC"
+        ],
+        "outboundTag": "OpenGate-Italy"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsD",
+          "VlessRealityD"
+        ],
+        "outboundTag": "OpenGate-Nigeria"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsE",
+          "VlessRealityE"
+        ],
+        "outboundTag": "OpenGate-Australia"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsF",
+          "VlessRealityF"
+        ],
+        "outboundTag": "OpenGate-Canada"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsG",
+          "VlessRealityG"
+        ],
+        "outboundTag": "OpenGate-Georgia"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsH",
+          "VlessRealityH"
+        ],
+        "outboundTag": "OpenGate-Turkey"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsI",
+          "VlessRealityI"
+        ],
+        "outboundTag": "OpenGate-Germany"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsJ",
+          "VlessRealityJ"
+        ],
+        "outboundTag": "OpenGate-UAE"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsK",
+          "VlessRealityK"
+        ],
+        "outboundTag": "OpenGate-Finland"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsL",
+          "VlessRealityL"
+        ],
+        "outboundTag": "OpenGate-UK"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsM",
+          "VlessRealityM"
+        ],
+        "outboundTag": "OpenGate-Oman"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsN",
+          "VlessRealityN"
+        ],
+        "outboundTag": "OpenGate-Netherlands"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessWsO"
+        ],
+        "outboundTag": "OpenGate-Singapore"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsP",
+          "VlessRealityP"
+        ],
+        "outboundTag": "OpenGate-Austria"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsQ",
+          "VlessRealityQ"
+        ],
+        "outboundTag": "OpenGate-Sweden"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsR",
+          "VlessRealityR"
+        ],
+        "outboundTag": "OpenGate-France"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsS",
+          "VlessRealityS"
+        ],
+        "outboundTag": "OpenGate-USA"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsT",
+          "VlessRealityT"
+        ],
+        "outboundTag": "OpenGate-Egypt"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsU",
+          "VlessRealityU"
+        ],
+        "outboundTag": "OpenGate-Albania"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsV",
+          "VlessRealityV"
+        ],
+        "outboundTag": "OpenGate-India"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsW",
+          "VlessRealityW"
+        ],
+        "outboundTag": "OpenGate-Japan"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "VlessTlsX",
+          "VlessRealityX"
+        ],
+        "outboundTag": "OpenGate-Bulgaria"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "tag": "Information",
+      "listen": "127.0.0.1",
+      "port": 1,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "none"
+      }
+    },
+    {
+      "tag": "VlessRealityA",
+      "listen": "127.0.0.1",
+      "port": 3098,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "rahbar.ir",
+            "web.bale.ai",
+            "next.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityH",
+      "listen": "127.0.0.1",
+      "port": 5836,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "az.rahbar.ir",
+            "web.bale.ai",
+            "api.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityI",
+      "listen": "127.0.0.1",
+      "port": 6291,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "ur.rahbar.ir",
+            "web.bale.ai",
+            "support.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityS",
+      "listen": "127.0.0.1",
+      "port": 4275,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "help.padvish.com",
+            "web.bale.ai",
+            "dev.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityL",
+      "listen": "127.0.0.1",
+      "port": 8563,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.143.233.133:443",
+          "xver": 0,
+          "serverNames": [
+            "www.hostiran.cloud",
+            "web.bale.ai",
+            "beta.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityR",
+      "listen": "127.0.0.1",
+      "port": 8106,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "shop.padvish.com",
+            "web.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityF",
+      "listen": "127.0.0.1",
+      "port": 2094,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "es.rahbar.ir",
+            "web.bale.ai",
+            "auth.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityM",
+      "listen": "127.0.0.1",
+      "port": 4938,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.143.233.133:443",
+          "xver": 0,
+          "serverNames": [
+            "mail.hostiran.cloud",
+            "web.bale.ai",
+            "meet.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityV",
+      "listen": "127.0.0.1",
+      "port": 9143,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "news.amnpardaz.com",
+            "web.bale.ai",
+            "docs.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityD",
+      "listen": "127.0.0.1",
+      "port": 2096,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "ar.rahbar.ir",
+            "web.bale.ai",
+            "business.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityT",
+      "listen": "127.0.0.1",
+      "port": 5690,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "amnpardaz.com",
+            "web.bale.ai",
+            "developers.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityJ",
+      "listen": "127.0.0.1",
+      "port": 3457,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "hi.rahbar.ir",
+            "web.bale.ai",
+            "bot.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityU",
+      "listen": "127.0.0.1",
+      "port": 6382,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "www.amnpardaz.com",
+            "web.bale.ai",
+            "gateway.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityN",
+      "listen": "127.0.0.1",
+      "port": 5217,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "padvish.com",
+            "web.bale.ai",
+            "ai.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityB",
+      "listen": "127.0.0.1",
+      "port": 3099,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "media.rahbar.ir",
+            "web.bale.ai",
+            "safir.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityC",
+      "listen": "127.0.0.1",
+      "port": 2097,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "en.rahbar.ir",
+            "web.bale.ai",
+            "faq.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityE",
+      "listen": "127.0.0.1",
+      "port": 2095,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "fr.rahbar.ir",
+            "web.bale.ai",
+            "tapi.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityG",
+      "listen": "127.0.0.1",
+      "port": 4712,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "95.156.237.20:443",
+          "xver": 0,
+          "serverNames": [
+            "ru.rahbar.ir",
+            "web.bale.ai",
+            "bank.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityK",
+      "listen": "127.0.0.1",
+      "port": 7124,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.143.234.133:443",
+          "xver": 0,
+          "serverNames": [
+            "hostiran.cloud",
+            "web.bale.ai",
+            "blog.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityP",
+      "listen": "127.0.0.1",
+      "port": 3821,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "www.padvish.com",
+            "web.bale.ai",
+            "www.ble.ir"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityQ",
+      "listen": "127.0.0.1",
+      "port": 7459,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "my.padvish.com",
+            "web.bale.ai",
+            "api.ble.ir"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityW",
+      "listen": "127.0.0.1",
+      "port": 4506,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "support.amnpardaz.com",
+            "web.bale.ai",
+            "meet.ble.ir"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessRealityX",
+      "listen": "127.0.0.1",
+      "port": 7938,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "185.231.114.218:443",
+          "xver": 0,
+          "serverNames": [
+            "download.amnpardaz.com",
+            "web.bale.ai",
+            "live.bale.ai"
+          ],
+          "privateKey": "<REDACTED>",
+          "publicKey": "yS7U1C0AeGGFEpULE1dkozfa1s-mx_2OtqiDW4axsnQ",
+          "shortIds": "<REDACTED>"
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsA",
+      "listen": "127.0.0.1",
+      "port": 13098,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsH",
+      "listen": "127.0.0.1",
+      "port": 15836,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsI",
+      "listen": "127.0.0.1",
+      "port": 16291,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsS",
+      "listen": "127.0.0.1",
+      "port": 14275,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsL",
+      "listen": "127.0.0.1",
+      "port": 18563,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsR",
+      "listen": "127.0.0.1",
+      "port": 18106,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsF",
+      "listen": "127.0.0.1",
+      "port": 12094,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsM",
+      "listen": "127.0.0.1",
+      "port": 14938,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsV",
+      "listen": "127.0.0.1",
+      "port": 19143,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsD",
+      "listen": "127.0.0.1",
+      "port": 12096,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsT",
+      "listen": "127.0.0.1",
+      "port": 15690,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsJ",
+      "listen": "127.0.0.1",
+      "port": 13457,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsU",
+      "listen": "127.0.0.1",
+      "port": 16382,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsN",
+      "listen": "127.0.0.1",
+      "port": 15217,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsB",
+      "listen": "127.0.0.1",
+      "port": 13099,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsC",
+      "listen": "127.0.0.1",
+      "port": 12097,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsE",
+      "listen": "127.0.0.1",
+      "port": 12095,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsG",
+      "listen": "127.0.0.1",
+      "port": 14712,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsK",
+      "listen": "127.0.0.1",
+      "port": 17124,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsP",
+      "listen": "127.0.0.1",
+      "port": 13821,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsQ",
+      "listen": "127.0.0.1",
+      "port": 17459,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsW",
+      "listen": "127.0.0.1",
+      "port": 14506,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessTlsX",
+      "listen": "127.0.0.1",
+      "port": 17938,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": "127.0.0.1:24080",
+            "xver": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {},
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.2",
+          "fingerprint": "chrome",
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    },
+    {
+      "tag": "VlessWsO",
+      "listen": "127.0.0.1",
+      "port": 6704,
+      "protocol": "vless",
+      "settings": {
+        "clients": [],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "updates",
+          "multiMode": true
+        },
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "mbn.myp2p.uk",
+          "minVersion": "1.3",
+          "fingerprint": "chrome",
+          "alpn": [
+            "h2"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/var/lib/marzban/certs/mbn.myp2p.uk.crt",
+              "keyFile": "/var/lib/marzban/certs/mbn.myp2p.uk.key"
+            }
+          ]
+        },
+        "sockopt": {
+          "tcpFastOpen": true,
+          "tcpNoDelay": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "fakedns"
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "DIRECT"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "BLOCK"
+    },
+    {
+      "tag": "OpenGate-France",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 105,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Germany",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 101,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Turkey",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 103,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-USA",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 110,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Switzerland",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 108,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Italy",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 109,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Nigeria",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 107,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Egypt",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 111,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-India",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 112,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-UK",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 113,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Oman",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 114,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Sweden",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 116,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Albania",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 115,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Bulgaria",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 117,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Austria",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 118,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Australia",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 120,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Canada",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 119,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Netherlands",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 121,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Finland",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 123,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-UAE",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 122,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Georgia",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 127,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Japan",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 125,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "OpenGate-Singapore",
+      "protocol": "freedom",
+      "streamSettings": {
+        "sockopt": {
+          "mark": 124,
+          "tcpFastOpen": true
+        }
+      },
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    }
+  ]
 }

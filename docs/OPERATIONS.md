@@ -153,3 +153,7 @@ Afterwards, point `mbn.myp2p.uk` at the new IP in Cloudflare (DNS only). OpenGat
 ## Reality SNIs (2026-11-04)
 
 Reality inbounds A-X (no O) use SNIs on `rahbar.ir` (A-J), `hostiran.cloud` (K-M), `padvish.com` (N, P-S) and `amnpardaz.com` (T-X); `dest` is the site's IP because names are resolved poorly from here. The old `*.bale.ai` names stay in `serverNames` and in `/etc/haproxy/marzban-sni.map` until every client has refreshed its subscription; remove them after that. Backups of the switch: `/root/migrate/sni-switch-20261104-135015`. Vision (`flow: xtls-rprx-vision`) is not enabled yet: it rejects clients that haven't refreshed, so plan it with an announcement.
+
+## TLS fragment test (2026-11-04)
+
+Host "✨ | Daily Fast ⚡TLS | ✨" (VlessTlsA, Germany) has `fragment_setting = 100-200,10-20,tlshello`; "Daily Fast 2 ⚡TLS" on the same inbound is left without it as the control. Fragmenting is done by the client (only the ClientHello), so the server needs no restart; clients pick it up on subscription refresh. Marzban adds `fragment=` to `vless://` links for TLS hosts only (not Reality), and only some clients (v2rayNG, Hiddify) honour it; full support needs JSON subscriptions (`USE_CUSTOM_JSON_*`, off). Undo: clear the field via `PUT /api/hosts` (backup `/root/migrate/hosts-pre-frag-*.json`). If the test is good, apply the same value to every VlessTls* host.

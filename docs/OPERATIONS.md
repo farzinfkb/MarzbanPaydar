@@ -157,3 +157,8 @@ Reality inbounds A-X (no O) use SNIs on `rahbar.ir` (A-J), `hostiran.cloud` (K-M
 ## TLS fragment test (2026-11-04)
 
 Host "✨ | Daily Fast ⚡TLS | ✨" (VlessTlsA, Germany) has `fragment_setting = 100-200,10-20,tlshello`; "Daily Fast 2 ⚡TLS" on the same inbound is left without it as the control. Fragmenting is done by the client (only the ClientHello), so the server needs no restart; clients pick it up on subscription refresh. Marzban adds `fragment=` to `vless://` links for TLS hosts only (not Reality), and only some clients (v2rayNG, Hiddify) honour it; full support needs JSON subscriptions (`USE_CUSTOM_JSON_*`, off). Undo: clear the field via `PUT /api/hosts` (backup `/root/migrate/hosts-pre-frag-*.json`). If the test is good, apply the same value to every VlessTls* host.
+
+## OpenGate location marks
+
+Each `OpenGate-<Country>` outbound in `xray_config.json` sends traffic with `sockopt.mark` N, and OpenGate's `ip rule fwmark N lookup N` sends table N out of an uplink `up-<name>`. When a location is changed in the OpenGate panel its uplink (and so its table/mark) can change, and the Marzban outbound must follow; a mark with no rule silently exits straight through `ens192` (Iran). To find the current mark: country → uplink name in `/var/lib/opengate/etc/labels.json` (e.g. `"ss-ip67": "Bulgaria"`), then `for t in $(seq 101 127); do echo $t $(ip route show table $t | head -1); done | grep up-ss-ip67`. Change the mark with `PUT /api/core/config` (restarts Xray only, ~1 s) and check with `ss -tn -e state established | grep -c fwmark:0x<hex>`.
+- 2026-11-04: Bulgaria moved to `up-ss-ip67`, mark 117 → 126 (backup `/root/migrate/xray_config.pre-bulgaria-20261104-231952.json`).

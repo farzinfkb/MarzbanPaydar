@@ -2416,7 +2416,7 @@
       "protocol": "freedom",
       "streamSettings": {
         "sockopt": {
-          "mark": 117,
+          "mark": 126,
           "tcpFastOpen": true
         }
       },
